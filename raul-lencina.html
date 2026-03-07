@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raúl Lencina — Entrenamiento & Nutrición</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #080c0a;
+    --dark: #0d1410;
+    --card: #111a14;
+    --green: #2dff6e;
+    --green-dim: #1aad47;
+    --green-glow: rgba(45,255,110,0.15);
+    --white: #f0f5f1;
+    --muted: #6b7d6e;
+    --border: rgba(45,255,110,0.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--white); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: radial-gradient(circle at 20% 20%, rgba(45,255,110,0.04) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(45,255,110,0.03) 0%, transparent 50%); pointer-events: none; z-index: 0; }
+  .cell-bg { position: fixed; inset: 0; opacity: 0.04; pointer-events: none; z-index: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Ccircle cx='60' cy='60' r='40' fill='none' stroke='%232dff6e' stroke-width='0.6'/%3E%3Ccircle cx='60' cy='60' r='20' fill='none' stroke='%232dff6e' stroke-width='0.4'/%3E%3Ccircle cx='60' cy='30' r='4' fill='none' stroke='%232dff6e' stroke-width='0.5'/%3E%3Ccircle cx='90' cy='60' r='4' fill='none' stroke='%232dff6e' stroke-width='0.5'/%3E%3Ccircle cx='60' cy='90' r='4' fill='none' stroke='%232dff6e' stroke-width='0.5'/%3E%3Ccircle cx='30' cy='60' r='4' fill='none' stroke='%232dff6e' stroke-width='0.5'/%3E%3Cline x1='60' y1='20' x2='60' y2='40' stroke='%232dff6e' stroke-width='0.4'/%3E%3Cline x1='80' y1='60' x2='100' y2='60' stroke='%232dff6e' stroke-width='0.4'/%3E%3Cline x1='60' y1='80' x2='60' y2='100' stroke='%232dff6e' stroke-width='0.4'/%3E%3Cline x1='20' y1='60' x2='40' y2='60' stroke='%232dff6e' stroke-width='0.4'/%3E%3C/svg%3E"); background-size: 120px 120px; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4vw; border-bottom: 1px solid var(--border); background: rgba(8,12,10,0.88); backdrop-filter: blur(14px); }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.12em; color: var(--white); text-decoration: none; }
+  .nav-logo span { color: var(--green); }
+  .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+  .nav-links a { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--green); }
+  .nav-right { display: flex; gap: 0.8rem; align-items: center; }
+  .nav-cta { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--black); background: var(--green); border: none; padding: 0.55rem 1.3rem; cursor: pointer; text-decoration: none; transition: opacity 0.2s; }
+  .nav-cta:hover { opacity: 0.85; }
+  .nav-admin-btn { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); background: transparent; border: 1px solid var(--border); padding: 0.5rem 1rem; cursor: pointer; transition: color 0.2s, border-color 0.2s; }
+  .nav-admin-btn:hover { color: var(--green); border-color: var(--green); }
+
+  /* HERO */
+  #hero { position: relative; min-height: 100vh; display: flex; align-items: center; padding: 10rem 4vw 6rem; z-index: 1; overflow: hidden; }
+  .hero-line { position: absolute; right: 0; top: 0; bottom: 0; width: 42vw; border-left: 1px solid var(--border); background: linear-gradient(135deg, transparent 60%, rgba(45,255,110,0.04) 100%); }
+  .hero-tag { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--green); margin-bottom: 1.6rem; display: flex; align-items: center; gap: 0.8rem; }
+  .hero-tag::before { content: ''; display: inline-block; width: 2rem; height: 1px; background: var(--green); }
+  .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem, 11vw, 10rem); line-height: 0.92; letter-spacing: 0.02em; color: var(--white); margin-bottom: 2rem; }
+  .hero-title .accent { color: var(--green); }
+  .hero-sub { font-size: 1.05rem; color: var(--muted); max-width: 38ch; line-height: 1.7; margin-bottom: 3rem; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary { font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--black); background: var(--green); border: none; padding: 0.9rem 2rem; cursor: pointer; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(45,255,110,0.3); }
+  .btn-ghost { font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green); background: transparent; border: 1px solid var(--border); padding: 0.9rem 2rem; cursor: pointer; text-decoration: none; transition: border-color 0.2s, background 0.2s; }
+  .btn-ghost:hover { border-color: var(--green); background: var(--green-glow); }
+  .hero-stats { position: absolute; right: 4vw; bottom: 4rem; display: flex; gap: 3rem; }
+  .stat-item { text-align: center; }
+  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem; color: var(--green); line-height: 1; }
+  .stat-label { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+
+  /* SECTIONS */
+  section { position: relative; z-index: 1; padding: 6rem 4vw; }
+  .section-label { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--green); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.8rem; }
+  .section-label::after { content: ''; flex: 1; max-width: 3rem; height: 1px; background: var(--green); }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1; letter-spacing: 0.03em; margin-bottom: 0.5rem; }
+
+  /* ABOUT */
+  #about { border-top: 1px solid var(--border); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; margin-top: 3rem; }
+  .about-text p { color: var(--muted); line-height: 1.8; margin-bottom: 1.2rem; font-size: 1rem; }
+  .about-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.8rem; }
+  .tag { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); border: 1px solid var(--border); padding: 0.4rem 0.9rem; background: var(--green-glow); }
+  .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .result-card { background: var(--card); border: 1px solid var(--border); padding: 1.5rem; position: relative; overflow: hidden; transition: border-color 0.3s; }
+  .result-card:hover { border-color: rgba(45,255,110,0.35); }
+  .result-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--green); }
+  .result-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 120px; text-align: center; }
+  .result-icon { font-size: 1.8rem; margin-bottom: 0.6rem; opacity: 0.4; }
+  .result-text { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); line-height: 1.6; }
+
+  /* SERVICES */
+  #services { border-top: 1px solid var(--border); }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; margin-top: 3rem; }
+  .service-card { background: var(--card); border: 1px solid var(--border); padding: 2.2rem; transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s; position: relative; overflow: hidden; }
+  .service-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--green), transparent); transform: scaleX(0); transition: transform 0.4s; }
+  .service-card:hover { transform: translateY(-4px); border-color: rgba(45,255,110,0.3); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
+  .service-card:hover::after { transform: scaleX(1); }
+  .service-icon { width: 44px; height: 44px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; font-size: 1.2rem; }
+  .service-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.05em; margin-bottom: 0.7rem; color: var(--white); }
+  .service-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.5rem; }
+  .service-price { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green); opacity: 0.7; }
+  .service-cta { display: inline-block; margin-top: 1.2rem; font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--black); background: var(--green); padding: 0.55rem 1.2rem; text-decoration: none; transition: opacity 0.2s; }
+  .service-cta:hover { opacity: 0.85; }
+
+  /* BLOG */
+  #blog { border-top: 1px solid var(--border); }
+  .blog-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem; }
+  .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.2rem; }
+  .blog-card { background: var(--card); border: 1px solid var(--border); padding: 2rem; transition: border-color 0.3s; cursor: pointer; display: flex; flex-direction: column; }
+  .blog-card:hover { border-color: rgba(45,255,110,0.3); }
+  .blog-card.featured { grid-column: 1 / -1; display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; align-items: start; }
+  .blog-cat { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green); margin-bottom: 0.8rem; }
+  .blog-title-card { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; line-height: 1.1; letter-spacing: 0.03em; color: var(--white); margin-bottom: 0.8rem; }
+  .blog-card.featured .blog-title-card { font-size: 2.2rem; }
+  .blog-excerpt { font-size: 0.88rem; color: var(--muted); line-height: 1.7; flex: 1; }
+  .blog-meta { display: flex; align-items: center; justify-content: space-between; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 0.5rem; }
+  .blog-date { font-family: 'Space Mono', monospace; font-size: 0.6rem; color: var(--muted); letter-spacing: 0.12em; }
+  .blog-actions { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+  .blog-share { font-family: 'Space Mono', monospace; font-size: 0.6rem; color: var(--green); letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; background: none; border: none; padding: 0; transition: opacity 0.2s; }
+  .blog-share:hover { opacity: 0.7; }
+  .blog-edit-btn { font-family: 'Space Mono', monospace; font-size: 0.58rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; background: none; border: 1px solid var(--border); padding: 0.22rem 0.55rem; transition: color 0.2s, border-color 0.2s; display: none; }
+  .blog-edit-btn:hover { color: var(--green); border-color: var(--green); }
+  .blog-del-btn { font-family: 'Space Mono', monospace; font-size: 0.58rem; color: #ff5555; letter-spacing: 0.1em; cursor: pointer; background: none; border: 1px solid rgba(255,85,85,0.25); padding: 0.22rem 0.55rem; transition: background 0.2s; display: none; }
+  .blog-del-btn:hover { background: rgba(255,85,85,0.12); }
+  body.admin-mode .blog-edit-btn,
+  body.admin-mode .blog-del-btn { display: inline-block; }
+  .blog-empty { grid-column: 1 / -1; text-align: center; padding: 5rem 2rem; border: 1px dashed var(--border); }
+  .blog-empty-icon { font-size: 2.5rem; opacity: 0.3; margin-bottom: 1rem; }
+  .blog-empty p { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+
+  /* CONTACT */
+  #contact { border-top: 1px solid var(--border); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3rem; align-items: center; }
+  .contact-text p { color: var(--muted); line-height: 1.8; margin-bottom: 2rem; font-size: 1rem; }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link { display: flex; align-items: center; gap: 1.2rem; padding: 1.2rem 1.5rem; background: var(--card); border: 1px solid var(--border); text-decoration: none; transition: border-color 0.3s, transform 0.3s; color: var(--white); }
+  .contact-link:hover { border-color: rgba(45,255,110,0.4); transform: translateX(4px); }
+  .contact-link-icon { width: 38px; height: 38px; background: var(--green-glow); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+  .contact-link-info { flex: 1; }
+  .contact-link-name { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); }
+  .contact-link-handle { font-size: 0.95rem; color: var(--white); margin-top: 0.2rem; }
+  .contact-link-arrow { color: var(--green); opacity: 0.5; font-size: 1rem; }
+  .contact-big-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 7vw, 6.5rem); line-height: 0.95; letter-spacing: 0.02em; color: var(--white); }
+  .contact-big-title .g { color: var(--green); }
+  .contact-big-title .outline { -webkit-text-stroke: 1px var(--muted); color: transparent; }
+
+  /* FOOTER */
+  footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 2.5rem 4vw; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.12em; color: var(--white); }
+  .footer-logo span { color: var(--green); }
+  .footer-copy { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.15em; color: var(--muted); }
+
+  /* ADMIN BAR */
+  #admin-bar { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 150; background: #071209; border-top: 2px solid var(--green); padding: 0.9rem 4vw; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  body.admin-mode #admin-bar { display: flex; }
+  .admin-bar-label { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green); display: flex; align-items: center; gap: 0.6rem; }
+  .admin-bar-label::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: pulse-dot 1.5s infinite; }
+  .admin-bar-actions { display: flex; gap: 0.8rem; }
+  .admin-btn-new { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--black); background: var(--green); border: none; padding: 0.65rem 1.5rem; cursor: pointer; transition: opacity 0.2s; }
+  .admin-btn-new:hover { opacity: 0.85; }
+  .admin-btn-exit { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); background: transparent; border: 1px solid var(--border); padding: 0.65rem 1.2rem; cursor: pointer; transition: color 0.2s, border-color 0.2s; }
+  .admin-btn-exit:hover { color: #ff5555; border-color: #ff5555; }
+
+  /* OVERLAYS */
+  .overlay { display: none; position: fixed; inset: 0; background: rgba(8,12,10,0.95); z-index: 200; align-items: center; justify-content: center; padding: 2rem; }
+  .overlay.open { display: flex; }
+  .overlay-box { background: var(--card); border: 1px solid var(--border); max-width: 660px; width: 100%; padding: 2.5rem; position: relative; max-height: 90vh; overflow-y: auto; }
+  .overlay-close { position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: var(--muted); font-size: 1.4rem; cursor: pointer; }
+  .overlay-close:hover { color: var(--white); }
+  .overlay-title { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--white); margin-bottom: 1.5rem; letter-spacing: 0.05em; }
+
+  /* READ MODAL */
+  .modal-cat { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green); margin-bottom: 0.8rem; }
+  .modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--white); margin-bottom: 0.6rem; line-height: 1.1; }
+  .modal-date { font-family: 'Space Mono', monospace; font-size: 0.6rem; color: var(--muted); letter-spacing: 0.12em; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+  .modal-body { font-size: 0.95rem; color: var(--muted); line-height: 1.85; }
+  .modal-body p { margin-bottom: 1rem; }
+
+  /* FORM */
+  .form-group { margin-bottom: 1.4rem; }
+  .form-label { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); display: block; margin-bottom: 0.5rem; }
+  .form-input, .form-select, .form-textarea { width: 100%; background: var(--black); border: 1px solid var(--border); color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 0.95rem; padding: 0.8rem 1rem; outline: none; transition: border-color 0.2s; }
+  .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--green); }
+  .form-textarea { min-height: 180px; resize: vertical; line-height: 1.65; }
+  .form-select { appearance: none; cursor: pointer; }
+  .form-select option { background: var(--card); }
+  .form-hint { font-family: 'Space Mono', monospace; font-size: 0.58rem; color: var(--muted); margin-top: 0.4rem; letter-spacing: 0.08em; line-height: 1.5; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-actions { display: flex; gap: 0.8rem; margin-top: 2rem; }
+  .form-submit { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--black); background: var(--green); border: none; padding: 0.85rem 1.8rem; cursor: pointer; transition: opacity 0.2s; flex: 1; }
+  .form-submit:hover { opacity: 0.85; }
+  .form-cancel { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); background: transparent; border: 1px solid var(--border); padding: 0.85rem 1.4rem; cursor: pointer; transition: color 0.2s; }
+  .form-cancel:hover { color: var(--white); }
+
+  /* LOGIN */
+  .login-subtitle { font-size: 0.92rem; color: var(--muted); margin-bottom: 2rem; line-height: 1.6; }
+  .login-error { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: #ff5555; letter-spacing: 0.1em; margin-top: 0.5rem; display: none; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .fade-up { animation: fadeUp 0.8s ease both; }
+  .fade-up:nth-child(2) { animation-delay: 0.15s; }
+  .fade-up:nth-child(3) { animation-delay: 0.3s; }
+  .fade-up:nth-child(4) { animation-delay: 0.45s; }
+  @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .live-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse-dot 1.8s ease infinite; margin-right: 0.5rem; }
+
+  @media (max-width: 900px) {
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .blog-card.featured { grid-column: auto; display: flex; flex-direction: column; }
+    .hero-stats { position: static; margin-top: 3rem; }
+    .results-grid { grid-template-columns: 1fr; }
+    nav .nav-links { display: none; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="cell-bg"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">Raúl <span>Lencina</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">Sobre mí</a></li>
+    <li><a href="#services">Servicios</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#contact">Contacto</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="nav-admin-btn" id="nav-admin-btn" onclick="openLogin()">⚙ Admin</button>
+    <a href="#contact" class="nav-cta">Contactar</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-line"></div>
+  <div>
+    <p class="hero-tag fade-up"><span class="live-dot"></span>Personal Trainer · Nutrición</p>
+    <h1 class="hero-title fade-up">ENTRENA<br>COME<br><span class="accent">EVOLUCIONA</span></h1>
+    <p class="hero-sub fade-up">Entrenamiento personalizado respaldado por ciencia. Resultados reales, metodología real.</p>
+    <div class="hero-btns fade-up">
+      <a href="#services" class="btn-primary">Ver servicios</a>
+      <a href="#blog" class="btn-ghost">Leer el blog</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Personalizado</div></div>
+    <div class="stat-item"><div class="stat-num">2EN1</div><div class="stat-label">Entrena + Nutrición</div></div>
+    <div class="stat-item"><div class="stat-num">∞</div><div class="stat-label">Seguimiento</div></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">Sobre mí</p>
+  <h2 class="section-title">RAÚL<br>LENCINA</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Soy personal trainer apasionado por el movimiento y el rendimiento humano. Actualmente cursando la carrera de Nutrición para ofrecer un enfoque integral: no solo cómo mover el cuerpo, sino también cómo alimentarlo.</p>
+      <p>Creo que cada cuerpo es diferente y merece un plan único. Mi metodología combina ciencia del ejercicio, progresión inteligente y acompañamiento constante para que no solo llegues a tu objetivo, sino que lo mantengas.</p>
+      <p>Si estás buscando resultados que duren, estás en el lugar indicado.</p>
+      <div class="about-tags">
+        <span class="tag">Entrenamiento de fuerza</span>
+        <span class="tag">Nutrición deportiva</span>
+        <span class="tag">Pérdida de peso</span>
+        <span class="tag">Ganancia muscular</span>
+        <span class="tag">Hábitos saludables</span>
+        <span class="tag">Ciencias Biológicas</span>
+      </div>
+    </div>
+    <div>
+      <p style="font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--green);margin-bottom:1rem;">Resultados de alumnos</p>
+      <div class="results-grid">
+        <div class="result-card"><div class="result-placeholder"><div class="result-icon">📸</div><div class="result-text">Antes / Después<br>Próximamente</div></div></div>
+        <div class="result-card"><div class="result-placeholder"><div class="result-icon">📸</div><div class="result-text">Antes / Después<br>Próximamente</div></div></div>
+        <div class="result-card"><div class="result-placeholder"><div class="result-icon">💬</div><div class="result-text">Testimonio<br>Próximamente</div></div></div>
+        <div class="result-card"><div class="result-placeholder"><div class="result-icon">📊</div><div class="result-text">Progreso<br>Próximamente</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <p class="section-label">Servicios</p>
+  <h2 class="section-title">PRODUCTOS &<br>ENTRENAMIENTOS</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">⚡</div>
+      <div class="service-name">Entrenamiento Personalizado</div>
+      <div class="service-desc">Plan de entrenamiento diseñado exclusivamente para vos. Análisis de tu nivel, objetivos y disponibilidad para crear la rutina ideal con seguimiento continuo.</div>
+      <div class="service-price">Precio a consultar</div>
+      <a href="#contact" class="service-cta">Consultar</a>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📋</div>
+      <div class="service-name">Rutinas Diseñadas</div>
+      <div class="service-desc">Rutinas estructuradas listas para ejecutar. Organizadas por objetivo, nivel y equipo disponible. Descargables y fáciles de seguir desde cualquier lugar.</div>
+      <div class="service-price">Precio a consultar</div>
+      <a href="#contact" class="service-cta">Consultar</a>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🥦</div>
+      <div class="service-name">Asesoría en Nutrición</div>
+      <div class="service-desc">Orientación nutricional basada en ciencia aplicada al rendimiento deportivo. Combiná tu entrenamiento con una alimentación que potencie tus resultados.</div>
+      <div class="service-price">Precio a consultar</div>
+      <a href="#contact" class="service-cta">Consultar</a>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog">
+  <div class="blog-header">
+    <div>
+      <p class="section-label">Blog</p>
+      <h2 class="section-title">ÚLTIMOS<br>ARTÍCULOS</h2>
+    </div>
+  </div>
+  <div class="blog-grid" id="blog-grid"></div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div>
+      <h2 class="contact-big-title"><span class="outline">HABLEMOS</span><br>DE TUS<br><span class="g">METAS.</span></h2>
+    </div>
+    <div class="contact-text">
+      <p class="section-label">Contacto</p>
+      <p>¿Listo para empezar? Escribime por WhatsApp o seguime en Instagram. Te respondo a la brevedad y coordinamos una charla sin compromiso.</p>
+      <div class="contact-links">
+        <a href="https://wa.me/5493764828210" target="_blank" class="contact-link">
+          <div class="contact-link-icon">💬</div>
+          <div class="contact-link-info"><div class="contact-link-name">WhatsApp</div><div class="contact-link-handle">+54 9 376 482-8210</div></div>
+          <span class="contact-link-arrow">→</span>
+        </a>
+        <a href="https://www.instagram.com/raullencina7" target="_blank" class="contact-link">
+          <div class="contact-link-icon">📸</div>
+          <div class="contact-link-info"><div class="contact-link-name">Instagram</div><div class="contact-link-handle">@raullencina7</div></div>
+          <span class="contact-link-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Raúl <span>Lencina</span></div>
+  <div class="footer-copy">© 2025 Raúl Lencina · Personal Trainer & Nutrición</div>
+  <div class="footer-copy">Diseñado para evolucionar</div>
+</footer>
+
+<!-- ADMIN BAR (visible solo en modo admin) -->
+<div id="admin-bar">
+  <span class="admin-bar-label">Modo administrador activo</span>
+  <div class="admin-bar-actions">
+    <button class="admin-btn-new" onclick="openEditor(null)">+ Nuevo artículo</button>
+    <button class="admin-btn-exit" onclick="exitAdmin()">Salir del panel</button>
+  </div>
+</div>
+
+<!-- LOGIN -->
+<div class="overlay" id="login-overlay">
+  <div class="overlay-box" style="max-width:400px;">
+    <button class="overlay-close" onclick="closeOverlay('login-overlay')">✕</button>
+    <div class="overlay-title">ACCESO ADMIN</div>
+    <p class="login-subtitle">Ingresá la contraseña para gestionar el blog.</p>
+    <div class="form-group">
+      <label class="form-label">Contraseña</label>
+      <input class="form-input" type="password" id="login-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')tryLogin()">
+      <div class="login-error" id="login-error">Contraseña incorrecta. Intentá de nuevo.</div>
+    </div>
+    <div class="form-actions">
+      <button class="form-submit" onclick="tryLogin()">Ingresar</button>
+      <button class="form-cancel" onclick="closeOverlay('login-overlay')">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- EDITOR -->
+<div class="overlay" id="editor-overlay">
+  <div class="overlay-box">
+    <button class="overlay-close" onclick="closeOverlay('editor-overlay')">✕</button>
+    <div class="overlay-title" id="editor-heading">NUEVO ARTÍCULO</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Categoría</label>
+        <select class="form-select" id="f-cat">
+          <option>Entrenamiento</option>
+          <option>Nutrición</option>
+          <option>Hábitos</option>
+          <option>Biología</option>
+          <option>Motivación</option>
+          <option>Tips</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Artículo destacado</label>
+        <select class="form-select" id="f-featured">
+          <option value="0">No destacado</option>
+          <option value="1">Sí — destacar (se muestra grande)</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Título del artículo</label>
+      <input class="form-input" type="text" id="f-title" placeholder="Ej: Los 5 errores más comunes al entrenar">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Resumen corto (aparece en la grilla)</label>
+      <input class="form-input" type="text" id="f-excerpt" placeholder="Una o dos frases que inviten a leer...">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Contenido completo del artículo</label>
+      <textarea class="form-textarea" id="f-body" placeholder="Escribí el artículo acá. Para separar párrafos, dejá una línea en blanco entre ellos.&#10;&#10;Ejemplo:&#10;&#10;El primer punto es...&#10;&#10;El segundo punto es..."></textarea>
+      <div class="form-hint">Cada vez que dejás una línea en blanco, se crea un nuevo párrafo automáticamente.</div>
+    </div>
+    <div class="form-actions">
+      <button class="form-submit" onclick="savePost()">Guardar artículo</button>
+      <button class="form-cancel" onclick="closeOverlay('editor-overlay')">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- READ -->
+<div class="overlay" id="read-overlay" onclick="if(event.target===this)closeOverlay('read-overlay')">
+  <div class="overlay-box">
+    <button class="overlay-close" onclick="closeOverlay('read-overlay')">✕</button>
+    <div id="read-content"></div>
+  </div>
+</div>
+
+<!-- DELETE CONFIRM -->
+<div class="overlay" id="delete-overlay">
+  <div class="overlay-box" style="max-width:420px;">
+    <button class="overlay-close" onclick="closeOverlay('delete-overlay')">✕</button>
+    <div class="overlay-title">¿ELIMINAR?</div>
+    <p style="color:var(--muted);margin-bottom:2rem;line-height:1.7;">Esta acción eliminará el artículo permanentemente y no se puede deshacer.</p>
+    <div class="form-actions">
+      <button class="form-submit" style="background:#ff5555;color:#fff;" onclick="confirmDelete()">Sí, eliminar</button>
+      <button class="form-cancel" onclick="closeOverlay('delete-overlay')">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ─── CONFIG ──────────────────────────────────────── */
+const ADMIN_PASS = 'raul2025';       // ← Raúl puede cambiar esto
+const STORAGE_KEY = 'rl_blog_v1';
+
+/* ─── STATE ───────────────────────────────────────── */
+let posts = [];
+let isAdmin = false;
+let editingId = null;
+let deletingId = null;
+
+/* ─── STORAGE ─────────────────────────────────────── */
+function loadPosts() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) { posts = JSON.parse(raw); return; }
+  } catch(e) {}
+  // Artículos de ejemplo para arrancar
+  const now = new Date();
+  const fmt = d => d.toLocaleDateString('es-AR', {day:'numeric', month:'short', year:'numeric'});
+  posts = [
+    { id: 3, cat: 'Hábitos', title: 'Por qué el descanso es parte del entrenamiento', excerpt: 'El sueño y la recuperación como herramienta activa de rendimiento.', body: 'El músculo no crece en el gimnasio, crece mientras dormís. Durante el sueño profundo se libera hormona de crecimiento y ocurre la mayor parte de la síntesis proteica muscular.\n\nIgnorar el descanso es como regar una planta y no darle luz. Dormir bien no es pereza, es parte del protocolo.', featured: false, date: fmt(new Date(now - 6*24*60*60*1000)) },
+    { id: 2, cat: 'Nutrición', title: 'Proteína: cuánto necesitás realmente', excerpt: 'Mitos y verdades sobre el consumo proteico. La evidencia actual, simplificada.', body: 'El debate sobre la proteína en el fitness está lleno de mitos. La evidencia actual sugiere que para la mayoría de las personas activas, entre 1.6 y 2.2 g de proteína por kilogramo de peso corporal es suficiente.\n\nMás no siempre es mejor. Lo importante es la distribución a lo largo del día y la calidad de las fuentes proteicas.', featured: false, date: fmt(new Date(now - 3*24*60*60*1000)) },
+    { id: 1, cat: 'Entrenamiento', title: 'La ciencia detrás de la hipertrofia: por qué el músculo crece', excerpt: 'Entender cómo y por qué el músculo crece es la base de un entrenamiento inteligente. Exploramos los mecanismos biológicos.', body: 'La hipertrofia muscular es el aumento del tamaño de las células musculares, y ocurre como respuesta adaptativa al estrés mecánico durante el entrenamiento.\n\nExisten tres mecanismos principales: tensión mecánica (el peso y la carga), daño muscular (las microrroturas que generan inflamación y reconstrucción) y estrés metabólico (la acumulación de metabolitos durante el ejercicio).\n\nEntender esto te permite diseñar tu entrenamiento de forma más inteligente: no se trata de hacer siempre más, sino de hacer lo correcto. La progresión gradual, el descanso suficiente y la alimentación adecuada son los pilares sobre los que descansa cada nuevo centímetro de músculo.', featured: true, date: fmt(now) }
+  ];
+  savePosts();
+}
+
+function savePosts() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(posts)); } catch(e) {}
+}
+
+/* ─── RENDER ──────────────────────────────────────── */
+function renderBlog() {
+  const grid = document.getElementById('blog-grid');
+  if (!posts.length) {
+    grid.innerHTML = `<div class="blog-empty"><div class="blog-empty-icon">✍️</div><p>No hay artículos todavía.<br>Entrá al panel admin para publicar el primero.</p></div>`;
+    return;
+  }
+  const sorted = [...posts].sort((a,b) => b.id - a.id);
+  const featIdx = sorted.findIndex(p => p.featured);
+  // Si hay destacado, moverlo al frente
+  if (featIdx > 0) { const [f] = sorted.splice(featIdx, 1); sorted.unshift(f); }
+
+  grid.innerHTML = sorted.map((p, i) => {
+    const isFeat = p.featured && i === 0;
+    return `<div class="blog-card${isFeat?' featured':''}" onclick="readPost(${p.id})">
+      <div>
+        <div class="blog-cat">${esc(p.cat)}</div>
+        <h3 class="blog-title-card">${esc(p.title)}</h3>
+        <p class="blog-excerpt">${esc(p.excerpt)}</p>
+      </div>
+      <div class="blog-meta">
+        <span class="blog-date">${esc(p.date)}</span>
+        <div class="blog-actions">
+          <button class="blog-edit-btn" onclick="event.stopPropagation();openEditor(${p.id})">✎ Editar</button>
+          <button class="blog-del-btn" onclick="event.stopPropagation();askDelete(${p.id})">✕ Borrar</button>
+          <button class="blog-share" onclick="event.stopPropagation();sharePost('${esc(p.title)}')">↗ Compartir</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ─── READ ────────────────────────────────────────── */
+function readPost(id) {
+  const p = posts.find(x => x.id === id);
+  if (!p) return;
+  const html = p.body.split(/\n\n+/).map(par => `<p>${esc(par.trim())}</p>`).join('');
+  document.getElementById('read-content').innerHTML =
+    `<div class="modal-cat">${esc(p.cat)}</div>
+     <div class="modal-title">${esc(p.title)}</div>
+     <div class="modal-date">${esc(p.date)}</div>
+     <div class="modal-body">${html}</div>`;
+  openOverlay('read-overlay');
+}
+
+function sharePost(title) {
+  if (navigator.share) { navigator.share({ title, url: location.href }); }
+  else { navigator.clipboard.writeText(location.href).then(() => alert('¡Link copiado!')); }
+}
+
+/* ─── AUTH ────────────────────────────────────────── */
+function openLogin() {
+  if (isAdmin) { exitAdmin(); return; }
+  document.getElementById('login-pass').value = '';
+  document.getElementById('login-error').style.display = 'none';
+  openOverlay('login-overlay');
+  setTimeout(() => document.getElementById('login-pass').focus(), 120);
+}
+
+function tryLogin() {
+  if (document.getElementById('login-pass').value === ADMIN_PASS) {
+    closeOverlay('login-overlay');
+    isAdmin = true;
+    document.body.classList.add('admin-mode');
+    document.getElementById('nav-admin-btn').textContent = '⚙ Salir';
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+    document.getElementById('login-pass').value = '';
+    document.getElementById('login-pass').focus();
+  }
+}
+
+function exitAdmin() {
+  isAdmin = false;
+  document.body.classList.remove('admin-mode');
+  document.getElementById('nav-admin-btn').textContent = '⚙ Admin';
+}
+
+/* ─── EDITOR ──────────────────────────────────────── */
+function openEditor(id) {
+  editingId = id;
+  document.getElementById('editor-heading').textContent = id ? 'EDITAR ARTÍCULO' : 'NUEVO ARTÍCULO';
+  if (id) {
+    const p = posts.find(x => x.id === id);
+    document.getElementById('f-cat').value = p.cat;
+    document.getElementById('f-featured').value = p.featured ? '1' : '0';
+    document.getElementById('f-title').value = p.title;
+    document.getElementById('f-excerpt').value = p.excerpt;
+    document.getElementById('f-body').value = p.body;
+  } else {
+    document.getElementById('f-cat').value = 'Entrenamiento';
+    document.getElementById('f-featured').value = '0';
+    document.getElementById('f-title').value = '';
+    document.getElementById('f-excerpt').value = '';
+    document.getElementById('f-body').value = '';
+  }
+  openOverlay('editor-overlay');
+  setTimeout(() => document.getElementById('f-title').focus(), 120);
+}
+
+function savePost() {
+  const title   = document.getElementById('f-title').value.trim();
+  const excerpt = document.getElementById('f-excerpt').value.trim();
+  const body    = document.getElementById('f-body').value.trim();
+  if (!title || !body) { alert('El título y el contenido son obligatorios.'); return; }
+
+  const dateStr = new Date().toLocaleDateString('es-AR', {day:'numeric', month:'short', year:'numeric'});
+
+  if (editingId) {
+    const idx = posts.findIndex(x => x.id === editingId);
+    posts[idx] = { ...posts[idx], cat: document.getElementById('f-cat').value, featured: document.getElementById('f-featured').value === '1', title, excerpt: excerpt || title, body };
+  } else {
+    posts.unshift({ id: Date.now(), cat: document.getElementById('f-cat').value, featured: document.getElementById('f-featured').value === '1', title, excerpt: excerpt || title, body, date: dateStr });
+  }
+  savePosts();
+  renderBlog();
+  closeOverlay('editor-overlay');
+}
+
+/* ─── DELETE ──────────────────────────────────────── */
+function askDelete(id) { deletingId = id; openOverlay('delete-overlay'); }
+function confirmDelete() {
+  posts = posts.filter(x => x.id !== deletingId);
+  savePosts(); renderBlog();
+  closeOverlay('delete-overlay');
+  deletingId = null;
+}
+
+/* ─── OVERLAY UTILS ───────────────────────────────── */
+function openOverlay(id) { document.getElementById(id).classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeOverlay(id) { document.getElementById(id).classList.remove('open'); document.body.style.overflow = ''; }
+
+/* ─── INIT ────────────────────────────────────────── */
+loadPosts();
+renderBlog();
+</script>
+</body>
+</html>
