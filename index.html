@@ -3,7 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Raúl Lencina — Entrenamiento & Nutrición</title>
+<title>Raúl Lencina — Personal Trainer & Nutrición en Misiones</title>
+
+<!-- ── SEO ── -->
+<meta name="description" content="Entrenamiento personalizado y asesoría nutricional en Misiones. Raúl Lencina Personal Trainer — resultados reales, metodología basada en ciencia.">
+<meta name="keywords" content="personal trainer misiones, entrenamiento personalizado, nutricion deportiva, rutinas, gym, posadas">
+<meta name="author" content="Raúl Lencina">
+<meta name="robots" content="index, follow">
+
+<!-- ── OPEN GRAPH (WhatsApp / Instagram previews) ── -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Raúl Lencina — Personal Trainer">
+<meta property="og:description" content="Entrenamiento personalizado y nutrición basada en ciencia. Resultados reales en Misiones.">
+<meta property="og:image" content="logo.jpg">
+<meta property="og:url" content="https://raul-trainner-v2.vercel.app">
+<meta property="og:locale" content="es_AR">
+
+<!-- ── TWITTER CARD ── -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Raúl Lencina — Personal Trainer">
+<meta name="twitter:description" content="Entrenamiento personalizado y nutrición basada en ciencia.">
+<meta name="twitter:image" content="logo.jpg">
+
+<!-- ── FAVICON ── -->
+<link rel="icon" href="logo.png" type="image/png">
+<link rel="apple-touch-icon" href="logo.png">
+
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -21,7 +46,7 @@
   html { scroll-behavior: smooth; }
   body { background: var(--black); color: var(--white); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; }
   body::before { content: ''; position: fixed; inset: 0; background-image: radial-gradient(circle at 20% 20%, rgba(34,197,94,0.04) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(34,197,94,0.03) 0%, transparent 50%); pointer-events: none; z-index: 0; }
-  .cell-bg { position: fixed; inset: 0; opacity: 0.06; pointer-events: none; z-index: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cline x1='0' y1='60' x2='60' y2='0' stroke='%2322c55e' stroke-width='0.6'/%3E%3Cline x1='-15' y1='60' x2='45' y2='0' stroke='%2322c55e' stroke-width='0.3'/%3E%3Cline x1='15' y1='60' x2='75' y2='0' stroke='%2322c55e' stroke-width='0.3'/%3E%3C/svg%3E"); background-size: 60px 60px; }
+  .cell-bg { position: fixed; inset: 0; opacity: 0.055; pointer-events: none; z-index: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cline x1='0' y1='64' x2='64' y2='0' stroke='%2322c55e' stroke-width='0.7'/%3E%3Cline x1='-16' y1='64' x2='48' y2='0' stroke='%2322c55e' stroke-width='0.3'/%3E%3Cline x1='16' y1='64' x2='80' y2='0' stroke='%2322c55e' stroke-width='0.3'/%3E%3C/svg%3E"); background-size: 64px 64px; }
 
   /* NAV */
   nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4vw; border-bottom: 1px solid var(--border); background: rgba(8,12,10,0.88); backdrop-filter: blur(14px); }
@@ -46,7 +71,7 @@
   .hero-sub { font-size: 1.05rem; color: var(--muted); max-width: 38ch; line-height: 1.7; margin-bottom: 3rem; }
   .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
   .btn-primary { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--black); background: var(--green); border: none; padding: 0.9rem 2rem; cursor: pointer; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(34,197,94,0.18); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(34,197,94,0.15); }
   .btn-ghost { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green); background: transparent; border: 1px solid var(--border); padding: 0.9rem 2rem; cursor: pointer; text-decoration: none; transition: border-color 0.2s, background 0.2s; }
   .btn-ghost:hover { border-color: var(--green); background: var(--green-glow); }
   .hero-stats { position: absolute; right: 4vw; bottom: 4rem; display: flex; gap: 3rem; }
@@ -60,6 +85,18 @@
   .section-label::after { content: ''; flex: 1; max-width: 3rem; height: 1px; background: var(--green); }
   .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1; letter-spacing: 0.03em; margin-bottom: 0.5rem; }
 
+  /* SCROLL REVEAL */
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal-left.visible { opacity: 1; transform: translateX(0); }
+  .reveal-right { opacity: 0; transform: translateX(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal-right.visible { opacity: 1; transform: translateX(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
   /* ABOUT */
   #about { border-top: 1px solid var(--border); }
   .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; margin-top: 3rem; }
@@ -68,18 +105,53 @@
   .tag { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); border: 1px solid var(--border); padding: 0.4rem 0.9rem; background: var(--green-glow); }
   .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
   .result-card { background: var(--card); border: 1px solid var(--border); padding: 1.5rem; position: relative; overflow: hidden; transition: border-color 0.3s; }
-  .result-card:hover { border-color: rgba(34,197,94,0.28); }
+  .result-card:hover { border-color: rgba(34,197,94,0.25); }
   .result-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--green); }
   .result-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 120px; text-align: center; }
   .result-icon { font-size: 1.8rem; margin-bottom: 0.6rem; opacity: 0.4; }
   .result-text { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); line-height: 1.6; }
+
+  /* ── PARA QUIÉN ── */
+  #para-quien { border-top: 1px solid var(--border); }
+  .paraquien-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-top: 3rem; }
+  .paraquien-list { display: flex; flex-direction: column; gap: 1rem; }
+  .paraquien-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1.2rem 1.4rem; background: var(--card); border: 1px solid var(--border); transition: border-color 0.3s, transform 0.3s; }
+  .paraquien-item:hover { border-color: rgba(34,197,94,0.25); transform: translateX(4px); }
+  .paraquien-check { font-size: 1.2rem; flex-shrink: 0; margin-top: 0.1rem; }
+  .paraquien-text { font-size: 0.98rem; color: var(--white); line-height: 1.5; }
+  .paraquien-text strong { color: var(--green); font-weight: 500; }
+  .paraquien-cta-block { background: var(--card); border: 1px solid var(--border); padding: 2.5rem; position: relative; overflow: hidden; }
+  .paraquien-cta-block::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--green), transparent); }
+  .paraquien-cta-title { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; line-height: 1; letter-spacing: 0.03em; margin-bottom: 1rem; }
+  .paraquien-cta-title span { color: var(--green); }
+  .paraquien-cta-text { font-size: 0.95rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.8rem; }
+
+  /* ── LEAD MAGNET ── */
+  #lead-magnet { border-top: 1px solid var(--border); background: linear-gradient(135deg, #0a1a0e 0%, var(--black) 60%); }
+  .lead-inner { border: 1px solid rgba(34,197,94,0.18); padding: 4rem; display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: center; position: relative; overflow: hidden; }
+  .lead-inner::after { content: ''; position: absolute; right: -80px; top: -80px; width: 300px; height: 300px; border-radius: 50%; border: 1px solid rgba(34,197,94,0.08); }
+  .lead-inner::before { content: ''; position: absolute; right: -40px; top: -40px; width: 200px; height: 200px; border-radius: 50%; border: 1px solid rgba(34,197,94,0.06); }
+  .lead-badge { display: inline-block; font-family: 'Montserrat', sans-serif; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--black); background: var(--green); padding: 0.3rem 0.8rem; margin-bottom: 1.2rem; }
+  .lead-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1; letter-spacing: 0.02em; margin-bottom: 1rem; }
+  .lead-title span { color: var(--green); }
+  .lead-desc { font-size: 0.95rem; color: var(--muted); line-height: 1.75; }
+  .lead-visual { display: flex; flex-direction: column; gap: 0; position: relative; z-index: 1; }
+  .lead-guide-card { background: #0d1f12; border: 1px solid rgba(34,197,94,0.15); padding: 2rem; }
+  .lead-guide-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+  .lead-guide-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.05em; color: var(--white); margin-bottom: 0.5rem; }
+  .lead-guide-sub { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green); margin-bottom: 1.2rem; }
+  .lead-guide-items { display: flex; flex-direction: column; gap: 0.5rem; }
+  .lead-guide-item { font-size: 0.85rem; color: var(--muted); display: flex; align-items: center; gap: 0.6rem; }
+  .lead-guide-item::before { content: '→'; color: var(--green); font-size: 0.75rem; flex-shrink: 0; }
+  .lead-cta { margin-top: 1.2rem; width: 100%; font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--black); background: var(--green); border: none; padding: 1rem; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
+  .lead-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(34,197,94,0.15); }
 
   /* SERVICES */
   #services { border-top: 1px solid var(--border); }
   .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; margin-top: 3rem; }
   .service-card { background: var(--card); border: 1px solid var(--border); padding: 2.2rem; transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s; position: relative; overflow: hidden; }
   .service-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--green), transparent); transform: scaleX(0); transition: transform 0.4s; }
-  .service-card:hover { transform: translateY(-4px); border-color: rgba(34,197,94,0.22); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
+  .service-card:hover { transform: translateY(-4px); border-color: rgba(34,197,94,0.20); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
   .service-card:hover::after { transform: scaleX(1); }
   .service-icon { width: 44px; height: 44px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; font-size: 1.2rem; }
   .service-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.05em; margin-bottom: 0.7rem; color: var(--white); }
@@ -92,9 +164,17 @@
   #blog { border-top: 1px solid var(--border); }
   .blog-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem; }
   .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.2rem; }
-  .blog-card { background: var(--card); border: 1px solid var(--border); padding: 2rem; transition: border-color 0.3s; cursor: pointer; display: flex; flex-direction: column; }
-  .blog-card:hover { border-color: rgba(34,197,94,0.22); }
-  .blog-card.featured { grid-column: 1 / -1; display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; align-items: start; }
+  .blog-card { background: var(--card); border: 1px solid var(--border); transition: border-color 0.3s; cursor: pointer; display: flex; flex-direction: column; overflow: hidden; }
+  .blog-card:hover { border-color: rgba(34,197,94,0.20); }
+  .blog-card.featured { grid-column: 1 / -1; display: grid; grid-template-columns: 1.4fr 1fr; align-items: stretch; }
+  /* Blog cover image */
+  .blog-cover { width: 100%; height: 180px; object-fit: cover; display: block; filter: brightness(0.85); transition: filter 0.3s; }
+  .blog-card:hover .blog-cover { filter: brightness(1); }
+  .blog-card.featured .blog-cover { height: 100%; min-height: 240px; }
+  .blog-cover-placeholder { width: 100%; height: 180px; background: linear-gradient(135deg, #0d1f12, #111a14); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border); }
+  .blog-card.featured .blog-cover-placeholder { height: 100%; min-height: 240px; border-bottom: none; border-right: 1px solid var(--border); }
+  .blog-cover-placeholder-icon { font-size: 2.5rem; opacity: 0.2; }
+  .blog-body { padding: 1.8rem; display: flex; flex-direction: column; flex: 1; }
   .blog-cat { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green); margin-bottom: 0.8rem; }
   .blog-title-card { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; line-height: 1.1; letter-spacing: 0.03em; color: var(--white); margin-bottom: 0.8rem; }
   .blog-card.featured .blog-title-card { font-size: 2.2rem; }
@@ -120,7 +200,7 @@
   .contact-text p { color: var(--muted); line-height: 1.8; margin-bottom: 2rem; font-size: 1rem; }
   .contact-links { display: flex; flex-direction: column; gap: 1rem; }
   .contact-link { display: flex; align-items: center; gap: 1.2rem; padding: 1.2rem 1.5rem; background: var(--card); border: 1px solid var(--border); text-decoration: none; transition: border-color 0.3s, transform 0.3s; color: var(--white); }
-  .contact-link:hover { border-color: rgba(34,197,94,0.28); transform: translateX(4px); }
+  .contact-link:hover { border-color: rgba(34,197,94,0.25); transform: translateX(4px); }
   .contact-link-icon { width: 38px; height: 38px; background: var(--green-glow); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
   .contact-link-info { flex: 1; }
   .contact-link-name { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); }
@@ -150,12 +230,13 @@
   /* OVERLAYS */
   .overlay { display: none; position: fixed; inset: 0; background: rgba(8,12,10,0.95); z-index: 200; align-items: center; justify-content: center; padding: 2rem; }
   .overlay.open { display: flex; }
-  .overlay-box { background: var(--card); border: 1px solid var(--border); max-width: 660px; width: 100%; padding: 2.5rem; position: relative; max-height: 90vh; overflow-y: auto; }
+  .overlay-box { background: var(--card); border: 1px solid var(--border); max-width: 680px; width: 100%; padding: 2.5rem; position: relative; max-height: 90vh; overflow-y: auto; }
   .overlay-close { position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: var(--muted); font-size: 1.4rem; cursor: pointer; }
   .overlay-close:hover { color: var(--white); }
   .overlay-title { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--white); margin-bottom: 1.5rem; letter-spacing: 0.05em; }
 
   /* READ MODAL */
+  .modal-cover { width: 100%; max-height: 280px; object-fit: cover; display: block; margin-bottom: 1.5rem; filter: brightness(0.9); }
   .modal-cat { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green); margin-bottom: 0.8rem; }
   .modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--white); margin-bottom: 0.6rem; line-height: 1.1; }
   .modal-date { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; color: var(--muted); letter-spacing: 0.12em; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
@@ -177,11 +258,15 @@
   .form-submit:hover { opacity: 0.85; }
   .form-cancel { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); background: transparent; border: 1px solid var(--border); padding: 0.85rem 1.4rem; cursor: pointer; transition: color 0.2s; }
   .form-cancel:hover { color: var(--white); }
+  /* Image preview in editor */
+  #img-preview { display: none; width: 100%; max-height: 160px; object-fit: cover; margin-top: 0.8rem; border: 1px solid var(--border); }
+  #img-preview.show { display: block; }
 
   /* LOGIN */
   .login-subtitle { font-size: 0.92rem; color: var(--muted); margin-bottom: 2rem; line-height: 1.6; }
   .login-error { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; color: #ff5555; letter-spacing: 0.1em; margin-top: 0.5rem; display: none; }
 
+  /* ANIMATIONS */
   @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
   .fade-up { animation: fadeUp 0.8s ease both; }
   .fade-up:nth-child(2) { animation-delay: 0.15s; }
@@ -189,14 +274,53 @@
   .fade-up:nth-child(4) { animation-delay: 0.45s; }
   @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
   .live-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse-dot 1.8s ease infinite; margin-right: 0.5rem; }
+  @keyframes countUp { from { opacity: 0; } to { opacity: 1; } }
 
+  /* QUESTIONNAIRE */
+  #cuestionario { border-top: 1px solid var(--border); }
+  .quiz-wrapper { max-width: 680px; margin: 3rem auto 0; }
+  .quiz-progress-bar { height: 3px; background: var(--border); margin-bottom: 2.5rem; border-radius: 2px; overflow: hidden; }
+  .quiz-progress-fill { height: 100%; background: var(--green); transition: width 0.5s ease; }
+  .quiz-step { display: none; animation: fadeUp 0.4s ease both; }
+  .quiz-step.active { display: block; }
+  .quiz-step-label { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--green); margin-bottom: 0.6rem; }
+  .quiz-question { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.6rem, 3.5vw, 2.4rem); line-height: 1.05; letter-spacing: 0.03em; color: var(--white); margin-bottom: 1.8rem; }
+  .quiz-options { display: flex; flex-direction: column; gap: 0.75rem; }
+  .quiz-option { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.3rem; background: var(--card); border: 1px solid var(--border); cursor: pointer; transition: border-color 0.2s, background 0.2s; font-size: 0.95rem; color: var(--white); text-align: left; width: 100%; }
+  .quiz-option:hover { border-color: rgba(34,197,94,0.35); background: rgba(34,197,94,0.05); }
+  .quiz-option.selected { border-color: var(--green); background: rgba(34,197,94,0.1); }
+  .quiz-option-icon { font-size: 1.1rem; flex-shrink: 0; }
+  .quiz-option-text { flex: 1; font-size: 0.93rem; }
+  .quiz-input-group { display: flex; flex-direction: column; gap: 1rem; }
+  .quiz-nav { display: flex; gap: 0.8rem; margin-top: 2rem; align-items: center; }
+  .quiz-btn-next { font-family: 'Montserrat', sans-serif; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--black); background: var(--green); border: none; padding: 0.85rem 2rem; cursor: pointer; transition: opacity 0.2s, transform 0.2s; flex: 1; font-weight: 600; }
+  .quiz-btn-next:hover { opacity: 0.88; transform: translateY(-1px); }
+  .quiz-btn-next:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+  .quiz-btn-back { font-family: 'Montserrat', sans-serif; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); background: transparent; border: 1px solid var(--border); padding: 0.85rem 1.2rem; cursor: pointer; transition: color 0.2s; }
+  .quiz-btn-back:hover { color: var(--white); }
+  .quiz-counter { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; color: var(--muted); letter-spacing: 0.1em; text-align: right; margin-top: 1.2rem; }
+  /* Result screen */
+  .quiz-result { text-align: center; padding: 2rem 0; animation: fadeUp 0.5s ease both; }
+  .quiz-result-icon { font-size: 3.5rem; margin-bottom: 1rem; }
+  .quiz-result-title { font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem; letter-spacing: 0.04em; color: var(--white); margin-bottom: 0.5rem; }
+  .quiz-result-title span { color: var(--green); }
+  .quiz-result-sub { font-size: 1rem; color: var(--muted); line-height: 1.7; max-width: 46ch; margin: 0 auto 2rem; }
+  .quiz-result-summary { background: var(--card); border: 1px solid var(--border); padding: 1.5rem 2rem; text-align: left; margin-bottom: 2rem; }
+  .quiz-result-summary-title { font-family: 'Montserrat', sans-serif; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green); margin-bottom: 1rem; }
+  .quiz-result-row { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border); font-size: 0.88rem; }
+  .quiz-result-row:last-child { border-bottom: none; }
+  .quiz-result-key { color: var(--muted); }
+  .quiz-result-val { color: var(--white); font-weight: 500; text-align: right; max-width: 55%; }
   @media (max-width: 900px) {
-    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .about-grid, .contact-grid, .paraquien-grid, .lead-inner { grid-template-columns: 1fr; gap: 3rem; }
     .blog-card.featured { grid-column: auto; display: flex; flex-direction: column; }
+    .blog-card.featured .blog-cover,
+    .blog-card.featured .blog-cover-placeholder { height: 200px; border-right: none; border-bottom: 1px solid var(--border); }
     .hero-stats { position: static; margin-top: 3rem; }
     .results-grid { grid-template-columns: 1fr; }
     nav .nav-links { display: none; }
     .form-row { grid-template-columns: 1fr; }
+    .lead-inner { padding: 2rem; }
   }
 </style>
 </head>
@@ -208,7 +332,9 @@
   <a href="#hero" class="nav-logo">Raúl <span>Lencina</span></a>
   <ul class="nav-links">
     <li><a href="#about">Sobre mí</a></li>
+    <li><a href="#para-quien">¿Para quién?</a></li>
     <li><a href="#services">Servicios</a></li>
+    <li><a href="#cuestionario">Cuestionario</a></li>
     <li><a href="#blog">Blog</a></li>
     <li><a href="#contact">Contacto</a></li>
   </ul>
@@ -222,27 +348,36 @@
 <section id="hero">
   <div class="hero-line"></div>
   <div>
-    <p class="hero-tag fade-up"><span class="live-dot"></span>Personal Trainer · Nutrición</p>
+    <p class="hero-tag fade-up"><span class="live-dot"></span>Personal Trainer · Nutrición · Misiones</p>
     <h1 class="hero-title fade-up">ENTRENA<br>COME<br><span class="accent">EVOLUCIONA</span></h1>
     <p class="hero-sub fade-up">Entrenamiento personalizado respaldado por ciencia. Resultados reales, metodología real.</p>
     <div class="hero-btns fade-up">
-      <a href="#services" class="btn-primary">Ver servicios</a>
+      <a href="#para-quien" class="btn-primary">¿Es para mí?</a>
       <a href="#blog" class="btn-ghost">Leer el blog</a>
     </div>
   </div>
   <div class="hero-stats">
-    <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Personalizado</div></div>
-    <div class="stat-item"><div class="stat-num">2EN1</div><div class="stat-label">Entrena + Nutrición</div></div>
-    <div class="stat-item"><div class="stat-num">∞</div><div class="stat-label">Seguimiento</div></div>
+    <div class="stat-item">
+      <div class="stat-num" data-count="100" data-suffix="%">0%</div>
+      <div class="stat-label">Personalizado</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">2EN1</div>
+      <div class="stat-label">Entrena + Nutrición</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" data-count="24" data-suffix="hs">0hs</div>
+      <div class="stat-label">Respuesta máx.</div>
+    </div>
   </div>
 </section>
 
 <!-- ABOUT -->
 <section id="about">
-  <p class="section-label">Sobre mí</p>
-  <h2 class="section-title">RAÚL<br>LENCINA</h2>
+  <p class="section-label reveal">Sobre mí</p>
+  <h2 class="section-title reveal">RAÚL<br>LENCINA</h2>
   <div class="about-grid">
-    <div class="about-text">
+    <div class="about-text reveal-left">
       <p>Soy personal trainer apasionado por el movimiento y el rendimiento humano. Actualmente cursando la carrera de Nutrición para ofrecer un enfoque integral: no solo cómo mover el cuerpo, sino también cómo alimentarlo.</p>
       <p>Creo que cada cuerpo es diferente y merece un plan único. Mi metodología combina ciencia del ejercicio, progresión inteligente y acompañamiento constante para que no solo llegues a tu objetivo, sino que lo mantengas.</p>
       <p>Si estás buscando resultados que duren, estás en el lugar indicado.</p>
@@ -255,7 +390,7 @@
         <span class="tag">Ciencias Biológicas</span>
       </div>
     </div>
-    <div>
+    <div class="reveal-right">
       <p style="font-family:'Montserrat',sans-serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--green);margin-bottom:1rem;">Resultados de alumnos</p>
       <div class="results-grid">
         <div class="result-card"><div class="result-placeholder"><div class="result-icon">📸</div><div class="result-text">Antes / Después<br>Próximamente</div></div></div>
@@ -267,26 +402,87 @@
   </div>
 </section>
 
+<!-- PARA QUIÉN -->
+<section id="para-quien">
+  <p class="section-label reveal">Marketing</p>
+  <h2 class="section-title reveal">¿ESTE ENTRENAMIENTO<br>ES PARA VOS?</h2>
+  <div class="paraquien-grid">
+    <div class="paraquien-list">
+      <div class="paraquien-item reveal reveal-delay-1">
+        <span class="paraquien-check">✅</span>
+        <span class="paraquien-text">Personas que quieren <strong>bajar de peso</strong> sin dietas imposibles ni rutinas agotadoras.</span>
+      </div>
+      <div class="paraquien-item reveal reveal-delay-2">
+        <span class="paraquien-check">✅</span>
+        <span class="paraquien-text">Personas que quieren <strong>ganar músculo</strong> con un plan real, progresivo y sostenible.</span>
+      </div>
+      <div class="paraquien-item reveal reveal-delay-3">
+        <span class="paraquien-check">✅</span>
+        <span class="paraquien-text">Personas que <strong>no saben por dónde empezar</strong> y necesitan guía clara desde el día uno.</span>
+      </div>
+      <div class="paraquien-item reveal reveal-delay-4">
+        <span class="paraquien-check">✅</span>
+        <span class="paraquien-text">Personas que buscan <strong>disciplina y estructura</strong> con seguimiento constante y personalizado.</span>
+      </div>
+      <div class="paraquien-item reveal">
+        <span class="paraquien-check">✅</span>
+        <span class="paraquien-text">Personas que quieren <strong>combinar entrenamiento y nutrición</strong> en un solo lugar, con coherencia.</span>
+      </div>
+    </div>
+    <div class="paraquien-cta-block reveal-right">
+      <div class="paraquien-cta-title">¿TE IDENTIFICÁS<br><span>CON ALGO?</span></div>
+      <p class="paraquien-cta-text">Escribime sin compromiso. En una charla corta te cuento cómo trabajamos y si es el momento indicado para arrancar.</p>
+      <a href="https://wa.me/5493764828210" target="_blank" class="btn-primary">💬 Escribime por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- LEAD MAGNET -->
+<section id="lead-magnet">
+  <div class="lead-inner reveal">
+    <div>
+      <div class="lead-badge">🎁 Descarga gratuita</div>
+      <h2 class="lead-title">LA GUÍA DE LOS <span>5 ERRORES</span> AL EMPEZAR EL GYM</h2>
+      <p class="lead-desc">Errores que el 90% de las personas comete al empezar a entrenar y que los frenan sin que se den cuenta. Descargala gratis y empezá con ventaja.</p>
+    </div>
+    <div class="lead-visual">
+      <div class="lead-guide-card">
+        <div class="lead-guide-icon">📋</div>
+        <div class="lead-guide-title">Guía gratuita PDF</div>
+        <div class="lead-guide-sub">Por Raúl Lencina · Personal Trainer</div>
+        <div class="lead-guide-items">
+          <div class="lead-guide-item">Error #1: Entrenar sin plan definido</div>
+          <div class="lead-guide-item">Error #2: Ignorar la nutrición base</div>
+          <div class="lead-guide-item">Error #3: Saltar el descanso</div>
+          <div class="lead-guide-item">Error #4: No registrar el progreso</div>
+          <div class="lead-guide-item">Error #5: Querer resultados rápidos</div>
+        </div>
+        <button class="lead-cta" onclick="downloadGuide()">📥 Descargar gratis por WhatsApp</button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- SERVICES -->
 <section id="services">
-  <p class="section-label">Servicios</p>
-  <h2 class="section-title">PRODUCTOS &<br>ENTRENAMIENTOS</h2>
+  <p class="section-label reveal">Servicios</p>
+  <h2 class="section-title reveal">PRODUCTOS &<br>ENTRENAMIENTOS</h2>
   <div class="services-grid">
-    <div class="service-card">
+    <div class="service-card reveal reveal-delay-1">
       <div class="service-icon">⚡</div>
       <div class="service-name">Entrenamiento Personalizado</div>
       <div class="service-desc">Plan de entrenamiento diseñado exclusivamente para vos. Análisis de tu nivel, objetivos y disponibilidad para crear la rutina ideal con seguimiento continuo.</div>
       <div class="service-price">Precio a consultar</div>
       <a href="#contact" class="service-cta">Consultar</a>
     </div>
-    <div class="service-card">
+    <div class="service-card reveal reveal-delay-2">
       <div class="service-icon">📋</div>
       <div class="service-name">Rutinas Diseñadas</div>
       <div class="service-desc">Rutinas estructuradas listas para ejecutar. Organizadas por objetivo, nivel y equipo disponible. Descargables y fáciles de seguir desde cualquier lugar.</div>
       <div class="service-price">Precio a consultar</div>
       <a href="#contact" class="service-cta">Consultar</a>
     </div>
-    <div class="service-card">
+    <div class="service-card reveal reveal-delay-3">
       <div class="service-icon">🥦</div>
       <div class="service-name">Asesoría en Nutrición</div>
       <div class="service-desc">Orientación nutricional basada en ciencia aplicada al rendimiento deportivo. Combiná tu entrenamiento con una alimentación que potencie tus resultados.</div>
@@ -300,20 +496,132 @@
 <section id="blog">
   <div class="blog-header">
     <div>
-      <p class="section-label">Blog</p>
-      <h2 class="section-title">ÚLTIMOS<br>ARTÍCULOS</h2>
+      <p class="section-label reveal">Blog</p>
+      <h2 class="section-title reveal">ÚLTIMOS<br>ARTÍCULOS</h2>
     </div>
   </div>
   <div class="blog-grid" id="blog-grid"></div>
 </section>
 
+<!-- CUESTIONARIO -->
+<section id="cuestionario">
+  <p class="section-label reveal">Cuestionario</p>
+  <h2 class="section-title reveal">CONTAME<br>SOBRE VOS</h2>
+  <p class="reveal" style="color:var(--muted);margin-top:0.5rem;margin-bottom:0;max-width:50ch;font-size:0.97rem;line-height:1.7;">Completá este cuestionario de 5 preguntas. Con esa info Raúl puede contactarte con una propuesta personalizada.</p>
+
+  <div class="quiz-wrapper">
+    <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quiz-progress" style="width:20%"></div></div>
+
+    <!-- STEP 1 -->
+    <div class="quiz-step active" id="step-1">
+      <div class="quiz-step-label">Pregunta 1 de 5</div>
+      <div class="quiz-question">¿CUÁL ES TU OBJETIVO<br>PRINCIPAL?</div>
+      <div class="quiz-options" id="opts-1">
+        <button class="quiz-option" onclick="selectOption(this,'goal','Bajar de peso')"><span class="quiz-option-icon">🔥</span><span class="quiz-option-text">Bajar de peso y mejorar mi composición corporal</span></button>
+        <button class="quiz-option" onclick="selectOption(this,'goal','Ganar músculo')"><span class="quiz-option-icon">💪</span><span class="quiz-option-text">Ganar músculo y aumentar mi fuerza</span></button>
+        <button class="quiz-option" onclick="selectOption(this,'goal','Mejorar salud')"><span class="quiz-option-icon">❤️</span><span class="quiz-option-text">Mejorar mi salud y energía en general</span></button>
+        <button class="quiz-option" onclick="selectOption(this,'goal','Empezar desde cero')"><span class="quiz-option-icon">🚀</span><span class="quiz-option-text">Empezar desde cero, no sé por dónde arrancar</span></button>
+      </div>
+      <div class="quiz-nav">
+        <button class="quiz-btn-next" id="next-1" onclick="nextStep(2)" disabled>Siguiente →</button>
+      </div>
+      <div class="quiz-counter">1 / 5</div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="quiz-step" id="step-2">
+      <div class="quiz-step-label">Pregunta 2 de 5</div>
+      <div class="quiz-question">¿CUÁNTO TIEMPO LLEVÁS<br>ENTRENANDO?</div>
+      <div class="quiz-options" id="opts-2">
+        <button class="quiz-option" onclick="selectOption(this,'level','Nunca entrené')"><span class="quiz-option-icon">🌱</span><span class="quiz-option-text">Nunca entrené o hace más de 1 año que no lo hago</span></button>
+        <button class="quiz-option" onclick="selectOption(this,'level','Menos de 1 año')"><span class="quiz-option-icon">📅</span><span class="quiz-option-text">Menos de 1 año, soy principiante</span></button>
+        <button class="quiz-option" onclick="selectOption(this,'level','1 a 3 años')"><span class="quiz-option-icon">🏋️</span><span class="quiz-option-text">Entre 1 y 3 años de manera irregular</span></button>
+        <button class="quiz-option" onclick="selectOption(this,'level','Más de 3 años')"><span class="quiz-option-icon">🥇</span><span class="quiz-option-text">Más de 3 años entrenando con constancia</span></button>
+      </div>
+      <div class="quiz-nav">
+        <button class="quiz-btn-back" onclick="prevStep(1)">← Atrás</button>
+        <button class="quiz-btn-next" id="next-2" onclick="nextStep(3)" disabled>Siguiente →</button>
+      </div>
+      <div class="quiz-counter">2 / 5</div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="quiz-step" id="step-3">
+      <div class="quiz-step-label">Pregunta 3 de 5</div>
+      <div class="quiz-question">¿CUÁNTOS DÍAS POR SEMANA<br>PODÉS ENTRENAR?</div>
+      <div class="quiz-options" id="opts-3">
+        <button class="quiz-option" onclick="selectOption(this,'days','1 a 2 días')"><span class="quiz-option-icon">📆</span><span class="quiz-option-text">1 a 2 días — tengo poco tiempo disponible</span></button>
+        <button class="quiz-option" onclick="selectOption(this,'days','3 días')"><span class="quiz-option-icon">📆</span><span class="quiz-option-text">3 días — el clásico lunes, miércoles y viernes</span></button>
+        <button class="quiz-option" onclick="selectOption(this,'days','4 a 5 días')"><span class="quiz-option-icon">📆</span><span class="quiz-option-text">4 a 5 días — tengo buena disponibilidad</span></button>
+        <button class="quiz-option" onclick="selectOption(this,'days','6 o más días')"><span class="quiz-option-icon">🔥</span><span class="quiz-option-text">6 o más días — quiero máxima dedicación</span></button>
+      </div>
+      <div class="quiz-nav">
+        <button class="quiz-btn-back" onclick="prevStep(2)">← Atrás</button>
+        <button class="quiz-btn-next" id="next-3" onclick="nextStep(4)" disabled>Siguiente →</button>
+      </div>
+      <div class="quiz-counter">3 / 5</div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="quiz-step" id="step-4">
+      <div class="quiz-step-label">Pregunta 4 de 5</div>
+      <div class="quiz-question">¿TENÉS ALGUNA LIMITACIÓN<br>O CONDICIÓN A TENER EN CUENTA?</div>
+      <div class="quiz-options" id="opts-4">
+        <button class="quiz-option" onclick="selectOption(this,'limit','Ninguna')"><span class="quiz-option-icon">✅</span><span class="quiz-option-text">No tengo ninguna limitación</span></button>
+        <button class="quiz-option" onclick="selectOption(this,'limit','Lesión o dolor')"><span class="quiz-option-icon">🦵</span><span class="quiz-option-text">Tengo una lesión o dolor crónico</span></button>
+        <button class="quiz-option" onclick="selectOption(this,'limit','Problema de salud')"><span class="quiz-option-icon">🩺</span><span class="quiz-option-text">Tengo un problema de salud (diabetes, hipertensión, etc.)</span></button>
+        <button class="quiz-option" onclick="selectOption(this,'limit','Otro')"><span class="quiz-option-icon">💬</span><span class="quiz-option-text">Otro (lo cuento cuando me contacten)</span></button>
+      </div>
+      <div class="quiz-nav">
+        <button class="quiz-btn-back" onclick="prevStep(3)">← Atrás</button>
+        <button class="quiz-btn-next" id="next-4" onclick="nextStep(5)" disabled>Siguiente →</button>
+      </div>
+      <div class="quiz-counter">4 / 5</div>
+    </div>
+
+    <!-- STEP 5 — DATOS DE CONTACTO -->
+    <div class="quiz-step" id="step-5">
+      <div class="quiz-step-label">Pregunta 5 de 5 — Última</div>
+      <div class="quiz-question">¿CÓMO TE LLAMO<br>Y DÓNDE TE ESCRIBO?</div>
+      <div class="quiz-input-group">
+        <input class="form-input" type="text" id="q-name" placeholder="Tu nombre" oninput="checkStep5()">
+        <input class="form-input" type="tel" id="q-phone" placeholder="Tu número de WhatsApp (ej: 376 4123456)" oninput="checkStep5()">
+        <select class="form-select" id="q-when" onchange="checkStep5()">
+          <option value="">¿Cuándo querés empezar?</option>
+          <option>Lo antes posible</option>
+          <option>En las próximas 2 semanas</option>
+          <option>El mes que viene</option>
+          <option>Solo estoy explorando</option>
+        </select>
+      </div>
+      <div class="quiz-nav">
+        <button class="quiz-btn-back" onclick="prevStep(4)">← Atrás</button>
+        <button class="quiz-btn-next" id="next-5" onclick="submitQuiz()" disabled>Enviar a WhatsApp 💬</button>
+      </div>
+      <div class="quiz-counter">5 / 5</div>
+    </div>
+
+    <!-- RESULTADO -->
+    <div class="quiz-step" id="step-result">
+      <div class="quiz-result">
+        <div class="quiz-result-icon">🎯</div>
+        <div class="quiz-result-title">¡LISTO,<br><span>GRACIAS!</span></div>
+        <p class="quiz-result-sub">Se abrió WhatsApp con tu información lista. Raúl te va a responder a la brevedad con una propuesta pensada para vos.</p>
+        <div class="quiz-result-summary" id="quiz-summary"></div>
+        <button class="btn-primary" onclick="resetQuiz()">Completar de nuevo</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section id="contact">
   <div class="contact-grid">
-    <div>
+    <div class="reveal-left">
       <h2 class="contact-big-title"><span class="outline">HABLEMOS</span><br>DE TUS<br><span class="g">METAS.</span></h2>
     </div>
-    <div class="contact-text">
+    <div class="contact-text reveal-right">
       <p class="section-label">Contacto</p>
       <p>¿Listo para empezar? Escribime por WhatsApp o seguime en Instagram. Te respondo a la brevedad y coordinamos una charla sin compromiso.</p>
       <div class="contact-links">
@@ -334,11 +642,11 @@
 
 <footer>
   <div class="footer-logo">Raúl <span>Lencina</span></div>
-  <div class="footer-copy">© 2025 Raúl Lencina · Personal Trainer & Nutrición</div>
+  <div class="footer-copy">© 2025 Raúl Lencina · Personal Trainer & Nutrición · Misiones, Argentina</div>
   <div class="footer-copy">Diseñado para evolucionar</div>
 </footer>
 
-<!-- ADMIN BAR (visible solo en modo admin) -->
+<!-- ADMIN BAR -->
 <div id="admin-bar">
   <span class="admin-bar-label">Modo administrador activo</span>
   <div class="admin-bar-actions">
@@ -395,13 +703,19 @@
       <input class="form-input" type="text" id="f-title" placeholder="Ej: Los 5 errores más comunes al entrenar">
     </div>
     <div class="form-group">
+      <label class="form-label">Imagen de portada (URL)</label>
+      <input class="form-input" type="url" id="f-img" placeholder="https://... (link de imagen de internet)" oninput="previewImg()">
+      <div class="form-hint">Pegá el link directo de una imagen (ej: de Unsplash, o subida a tu Drive). Opcional.</div>
+      <img id="img-preview" alt="Preview de portada">
+    </div>
+    <div class="form-group">
       <label class="form-label">Resumen corto (aparece en la grilla)</label>
       <input class="form-input" type="text" id="f-excerpt" placeholder="Una o dos frases que inviten a leer...">
     </div>
     <div class="form-group">
       <label class="form-label">Contenido completo del artículo</label>
-      <textarea class="form-textarea" id="f-body" placeholder="Escribí el artículo acá. Para separar párrafos, dejá una línea en blanco entre ellos.&#10;&#10;Ejemplo:&#10;&#10;El primer punto es...&#10;&#10;El segundo punto es..."></textarea>
-      <div class="form-hint">Cada vez que dejás una línea en blanco, se crea un nuevo párrafo automáticamente.</div>
+      <textarea class="form-textarea" id="f-body" placeholder="Escribí el artículo acá. Para separar párrafos, dejá una línea en blanco."></textarea>
+      <div class="form-hint">Cada línea en blanco entre párrafos los separa automáticamente.</div>
     </div>
     <div class="form-actions">
       <button class="form-submit" onclick="savePost()">Guardar artículo</button>
@@ -432,29 +746,28 @@
 </div>
 
 <script>
-/* ─── CONFIG ──────────────────────────────────────── */
-const ADMIN_PASS = 'raul2025';       // ← Raúl puede cambiar esto
-const STORAGE_KEY = 'rl_blog_v1';
+/* ─── CONFIG ── */
+const ADMIN_PASS = 'raul2025';
+const STORAGE_KEY = 'rl_blog_v2';
 
-/* ─── STATE ───────────────────────────────────────── */
+/* ─── STATE ── */
 let posts = [];
 let isAdmin = false;
 let editingId = null;
 let deletingId = null;
 
-/* ─── STORAGE ─────────────────────────────────────── */
+/* ─── STORAGE ── */
 function loadPosts() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) { posts = JSON.parse(raw); return; }
   } catch(e) {}
-  // Artículos de ejemplo para arrancar
   const now = new Date();
   const fmt = d => d.toLocaleDateString('es-AR', {day:'numeric', month:'short', year:'numeric'});
   posts = [
-    { id: 3, cat: 'Hábitos', title: 'Por qué el descanso es parte del entrenamiento', excerpt: 'El sueño y la recuperación como herramienta activa de rendimiento.', body: 'El músculo no crece en el gimnasio, crece mientras dormís. Durante el sueño profundo se libera hormona de crecimiento y ocurre la mayor parte de la síntesis proteica muscular.\n\nIgnorar el descanso es como regar una planta y no darle luz. Dormir bien no es pereza, es parte del protocolo.', featured: false, date: fmt(new Date(now - 6*24*60*60*1000)) },
-    { id: 2, cat: 'Nutrición', title: 'Proteína: cuánto necesitás realmente', excerpt: 'Mitos y verdades sobre el consumo proteico. La evidencia actual, simplificada.', body: 'El debate sobre la proteína en el fitness está lleno de mitos. La evidencia actual sugiere que para la mayoría de las personas activas, entre 1.6 y 2.2 g de proteína por kilogramo de peso corporal es suficiente.\n\nMás no siempre es mejor. Lo importante es la distribución a lo largo del día y la calidad de las fuentes proteicas.', featured: false, date: fmt(new Date(now - 3*24*60*60*1000)) },
-    { id: 1, cat: 'Entrenamiento', title: 'La ciencia detrás de la hipertrofia: por qué el músculo crece', excerpt: 'Entender cómo y por qué el músculo crece es la base de un entrenamiento inteligente. Exploramos los mecanismos biológicos.', body: 'La hipertrofia muscular es el aumento del tamaño de las células musculares, y ocurre como respuesta adaptativa al estrés mecánico durante el entrenamiento.\n\nExisten tres mecanismos principales: tensión mecánica (el peso y la carga), daño muscular (las microrroturas que generan inflamación y reconstrucción) y estrés metabólico (la acumulación de metabolitos durante el ejercicio).\n\nEntender esto te permite diseñar tu entrenamiento de forma más inteligente: no se trata de hacer siempre más, sino de hacer lo correcto. La progresión gradual, el descanso suficiente y la alimentación adecuada son los pilares sobre los que descansa cada nuevo centímetro de músculo.', featured: true, date: fmt(now) }
+    { id: 3, cat: 'Hábitos', title: 'Por qué el descanso es parte del entrenamiento', excerpt: 'El sueño y la recuperación como herramienta activa de rendimiento.', body: 'El músculo no crece en el gimnasio, crece mientras dormís. Durante el sueño profundo se libera hormona de crecimiento y ocurre la mayor parte de la síntesis proteica muscular.\n\nIgnorar el descanso es como regar una planta y no darle luz. Dormir bien no es pereza, es parte del protocolo.', featured: false, date: fmt(new Date(now - 6*24*60*60*1000)), img: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=800&q=80' },
+    { id: 2, cat: 'Nutrición', title: 'Proteína: cuánto necesitás realmente', excerpt: 'Mitos y verdades sobre el consumo proteico. La evidencia actual, simplificada.', body: 'El debate sobre la proteína en el fitness está lleno de mitos. La evidencia actual sugiere que para la mayoría de las personas activas, entre 1.6 y 2.2 g de proteína por kilogramo de peso corporal es suficiente.\n\nMás no siempre es mejor. Lo importante es la distribución a lo largo del día y la calidad de las fuentes proteicas.', featured: false, date: fmt(new Date(now - 3*24*60*60*1000)), img: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80' },
+    { id: 1, cat: 'Entrenamiento', title: 'La ciencia detrás de la hipertrofia: por qué el músculo crece', excerpt: 'Entender cómo y por qué el músculo crece es la base de un entrenamiento inteligente. Exploramos los mecanismos biológicos.', body: 'La hipertrofia muscular es el aumento del tamaño de las células musculares, y ocurre como respuesta adaptativa al estrés mecánico durante el entrenamiento.\n\nExisten tres mecanismos principales: tensión mecánica (el peso y la carga), daño muscular (las microrroturas que generan inflamación y reconstrucción) y estrés metabólico (la acumulación de metabolitos durante el ejercicio).\n\nEntender esto te permite diseñar tu entrenamiento de forma más inteligente: no se trata de hacer siempre más, sino de hacer lo correcto.', featured: true, date: fmt(now), img: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80' }
   ];
   savePosts();
 }
@@ -463,7 +776,7 @@ function savePosts() {
   try { localStorage.setItem(STORAGE_KEY, JSON.stringify(posts)); } catch(e) {}
 }
 
-/* ─── RENDER ──────────────────────────────────────── */
+/* ─── RENDER BLOG ── */
 function renderBlog() {
   const grid = document.getElementById('blog-grid');
   if (!posts.length) {
@@ -472,23 +785,27 @@ function renderBlog() {
   }
   const sorted = [...posts].sort((a,b) => b.id - a.id);
   const featIdx = sorted.findIndex(p => p.featured);
-  // Si hay destacado, moverlo al frente
   if (featIdx > 0) { const [f] = sorted.splice(featIdx, 1); sorted.unshift(f); }
 
   grid.innerHTML = sorted.map((p, i) => {
     const isFeat = p.featured && i === 0;
-    return `<div class="blog-card${isFeat?' featured':''}" onclick="readPost(${p.id})">
-      <div>
+    const coverHtml = p.img
+      ? `<img class="blog-cover" src="${esc(p.img)}" alt="${esc(p.title)}" loading="lazy" onerror="this.style.display='none'">`
+      : `<div class="blog-cover-placeholder"><span class="blog-cover-placeholder-icon">📝</span></div>`;
+    return `
+    <div class="blog-card${isFeat?' featured':''}" onclick="readPost(${p.id})">
+      ${coverHtml}
+      <div class="blog-body">
         <div class="blog-cat">${esc(p.cat)}</div>
         <h3 class="blog-title-card">${esc(p.title)}</h3>
         <p class="blog-excerpt">${esc(p.excerpt)}</p>
-      </div>
-      <div class="blog-meta">
-        <span class="blog-date">${esc(p.date)}</span>
-        <div class="blog-actions">
-          <button class="blog-edit-btn" onclick="event.stopPropagation();openEditor(${p.id})">✎ Editar</button>
-          <button class="blog-del-btn" onclick="event.stopPropagation();askDelete(${p.id})">✕ Borrar</button>
-          <button class="blog-share" onclick="event.stopPropagation();sharePost('${esc(p.title)}')">↗ Compartir</button>
+        <div class="blog-meta">
+          <span class="blog-date">${esc(p.date)}</span>
+          <div class="blog-actions">
+            <button class="blog-edit-btn" onclick="event.stopPropagation();openEditor(${p.id})">✎ Editar</button>
+            <button class="blog-del-btn" onclick="event.stopPropagation();askDelete(${p.id})">✕ Borrar</button>
+            <button class="blog-share" onclick="event.stopPropagation();sharePost('${esc(p.title)}')">↗ Compartir</button>
+          </div>
         </div>
       </div>
     </div>`;
@@ -499,16 +816,18 @@ function esc(s) {
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-/* ─── READ ────────────────────────────────────────── */
+/* ─── READ ── */
 function readPost(id) {
   const p = posts.find(x => x.id === id);
   if (!p) return;
-  const html = p.body.split(/\n\n+/).map(par => `<p>${esc(par.trim())}</p>`).join('');
+  const bodyHtml = p.body.split(/\n\n+/).map(par => `<p>${esc(par.trim())}</p>`).join('');
+  const coverHtml = p.img ? `<img class="modal-cover" src="${esc(p.img)}" alt="${esc(p.title)}" onerror="this.style.display='none'">` : '';
   document.getElementById('read-content').innerHTML =
-    `<div class="modal-cat">${esc(p.cat)}</div>
+    `${coverHtml}
+     <div class="modal-cat">${esc(p.cat)}</div>
      <div class="modal-title">${esc(p.title)}</div>
      <div class="modal-date">${esc(p.date)}</div>
-     <div class="modal-body">${html}</div>`;
+     <div class="modal-body">${bodyHtml}</div>`;
   openOverlay('read-overlay');
 }
 
@@ -517,7 +836,15 @@ function sharePost(title) {
   else { navigator.clipboard.writeText(location.href).then(() => alert('¡Link copiado!')); }
 }
 
-/* ─── AUTH ────────────────────────────────────────── */
+/* ─── IMAGE PREVIEW ── */
+function previewImg() {
+  const url = document.getElementById('f-img').value.trim();
+  const preview = document.getElementById('img-preview');
+  if (url) { preview.src = url; preview.classList.add('show'); }
+  else { preview.classList.remove('show'); }
+}
+
+/* ─── AUTH ── */
 function openLogin() {
   if (isAdmin) { exitAdmin(); return; }
   document.getElementById('login-pass').value = '';
@@ -545,21 +872,25 @@ function exitAdmin() {
   document.getElementById('nav-admin-btn').textContent = '⚙ Admin';
 }
 
-/* ─── EDITOR ──────────────────────────────────────── */
+/* ─── EDITOR ── */
 function openEditor(id) {
   editingId = id;
   document.getElementById('editor-heading').textContent = id ? 'EDITAR ARTÍCULO' : 'NUEVO ARTÍCULO';
+  document.getElementById('img-preview').classList.remove('show');
   if (id) {
     const p = posts.find(x => x.id === id);
     document.getElementById('f-cat').value = p.cat;
     document.getElementById('f-featured').value = p.featured ? '1' : '0';
     document.getElementById('f-title').value = p.title;
+    document.getElementById('f-img').value = p.img || '';
     document.getElementById('f-excerpt').value = p.excerpt;
     document.getElementById('f-body').value = p.body;
+    if (p.img) { document.getElementById('img-preview').src = p.img; document.getElementById('img-preview').classList.add('show'); }
   } else {
     document.getElementById('f-cat').value = 'Entrenamiento';
     document.getElementById('f-featured').value = '0';
     document.getElementById('f-title').value = '';
+    document.getElementById('f-img').value = '';
     document.getElementById('f-excerpt').value = '';
     document.getElementById('f-body').value = '';
   }
@@ -571,22 +902,21 @@ function savePost() {
   const title   = document.getElementById('f-title').value.trim();
   const excerpt = document.getElementById('f-excerpt').value.trim();
   const body    = document.getElementById('f-body').value.trim();
+  const img     = document.getElementById('f-img').value.trim();
   if (!title || !body) { alert('El título y el contenido son obligatorios.'); return; }
-
   const dateStr = new Date().toLocaleDateString('es-AR', {day:'numeric', month:'short', year:'numeric'});
-
   if (editingId) {
     const idx = posts.findIndex(x => x.id === editingId);
-    posts[idx] = { ...posts[idx], cat: document.getElementById('f-cat').value, featured: document.getElementById('f-featured').value === '1', title, excerpt: excerpt || title, body };
+    posts[idx] = { ...posts[idx], cat: document.getElementById('f-cat').value, featured: document.getElementById('f-featured').value === '1', title, excerpt: excerpt || title, body, img };
   } else {
-    posts.unshift({ id: Date.now(), cat: document.getElementById('f-cat').value, featured: document.getElementById('f-featured').value === '1', title, excerpt: excerpt || title, body, date: dateStr });
+    posts.unshift({ id: Date.now(), cat: document.getElementById('f-cat').value, featured: document.getElementById('f-featured').value === '1', title, excerpt: excerpt || title, body, img, date: dateStr });
   }
   savePosts();
   renderBlog();
   closeOverlay('editor-overlay');
 }
 
-/* ─── DELETE ──────────────────────────────────────── */
+/* ─── DELETE ── */
 function askDelete(id) { deletingId = id; openOverlay('delete-overlay'); }
 function confirmDelete() {
   posts = posts.filter(x => x.id !== deletingId);
@@ -595,13 +925,138 @@ function confirmDelete() {
   deletingId = null;
 }
 
-/* ─── OVERLAY UTILS ───────────────────────────────── */
+/* ─── OVERLAY UTILS ── */
 function openOverlay(id) { document.getElementById(id).classList.add('open'); document.body.style.overflow = 'hidden'; }
 function closeOverlay(id) { document.getElementById(id).classList.remove('open'); document.body.style.overflow = ''; }
 
-/* ─── INIT ────────────────────────────────────────── */
+/* ─── LEAD MAGNET ── */
+function downloadGuide() {
+  window.open('https://wa.me/5493764828210?text=Hola%20Ra%C3%BAl%2C%20me%20interesa%20la%20gu%C3%ADa%20gratuita%20de%20los%205%20errores%20al%20empezar%20el%20gym%20%F0%9F%93%8B', '_blank');
+}
+
+/* ─── SCROLL REVEAL ── */
+function initReveal() {
+  const els = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(el => obs.observe(el));
+}
+
+/* ─── ANIMATED COUNTERS ── */
+function animateCounter(el) {
+  const target = parseInt(el.dataset.count);
+  const suffix = el.dataset.suffix || '';
+  const duration = 1800;
+  const start = performance.now();
+  function step(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(eased * target) + suffix;
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+function initCounters() {
+  const counters = document.querySelectorAll('[data-count]');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { animateCounter(e.target); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(el => obs.observe(el));
+}
+
+/* ─── QUIZ ── */
+const quizAnswers = {};
+
+function selectOption(btn, key, value) {
+  // Deselect siblings
+  btn.closest('.quiz-options').querySelectorAll('.quiz-option').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  quizAnswers[key] = value;
+  // Enable next button for this step
+  const stepNum = btn.closest('.quiz-step').id.replace('step-', '');
+  const nextBtn = document.getElementById('next-' + stepNum);
+  if (nextBtn) nextBtn.disabled = false;
+}
+
+function nextStep(n) {
+  document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step-' + n).classList.add('active');
+  const pct = Math.round((n / 5) * 100);
+  document.getElementById('quiz-progress').style.width = pct + '%';
+  document.getElementById('cuestionario').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function prevStep(n) { nextStep(n); }
+
+function checkStep5() {
+  const name  = document.getElementById('q-name').value.trim();
+  const phone = document.getElementById('q-phone').value.trim();
+  const when  = document.getElementById('q-when').value;
+  document.getElementById('next-5').disabled = !(name && phone && when);
+}
+
+function submitQuiz() {
+  const name  = document.getElementById('q-name').value.trim();
+  const phone = document.getElementById('q-phone').value.trim();
+  const when  = document.getElementById('q-when').value;
+
+  quizAnswers.name  = name;
+  quizAnswers.phone = phone;
+  quizAnswers.when  = when;
+
+  // Build WhatsApp message
+  const msg = encodeURIComponent(
+    `Hola Raúl! Completé el cuestionario de tu web 📋\n\n` +
+    `👤 Nombre: ${name}\n` +
+    `🎯 Objetivo: ${quizAnswers.goal || '-'}\n` +
+    `💪 Nivel: ${quizAnswers.level || '-'}\n` +
+    `📅 Días disponibles: ${quizAnswers.days || '-'}\n` +
+    `🩺 Limitaciones: ${quizAnswers.limit || '-'}\n` +
+    `⏰ Quiero empezar: ${when}\n` +
+    `📞 Mi WhatsApp: ${phone}\n\n` +
+    `¡Quedo esperando tu respuesta!`
+  );
+  window.open(`https://wa.me/5493764828210?text=${msg}`, '_blank');
+
+  // Show summary
+  const labels = { goal: 'Objetivo', level: 'Nivel', days: 'Días/semana', limit: 'Limitaciones', name: 'Nombre', phone: 'WhatsApp', when: 'Quiere empezar' };
+  const keys   = ['name', 'phone', 'goal', 'level', 'days', 'limit', 'when'];
+  document.getElementById('quiz-summary').innerHTML =
+    `<div class="quiz-result-summary-title">Tu respuestas</div>` +
+    keys.map(k => quizAnswers[k]
+      ? `<div class="quiz-result-row"><span class="quiz-result-key">${labels[k]}</span><span class="quiz-result-val">${quizAnswers[k]}</span></div>`
+      : '').join('');
+
+  // Show result step
+  document.getElementById('quiz-progress').style.width = '100%';
+  document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step-result').classList.add('active');
+  document.getElementById('cuestionario').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function resetQuiz() {
+  Object.keys(quizAnswers).forEach(k => delete quizAnswers[k]);
+  document.querySelectorAll('.quiz-option').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('.quiz-btn-next[id^="next-"]').forEach(b => b.disabled = true);
+  document.getElementById('q-name').value = '';
+  document.getElementById('q-phone').value = '';
+  document.getElementById('q-when').value = '';
+  document.getElementById('quiz-progress').style.width = '20%';
+  document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step-1').classList.add('active');
+}
+
+/* ─── INIT ── */
 loadPosts();
 renderBlog();
+initReveal();
+initCounters();
 </script>
 </body>
 </html>
