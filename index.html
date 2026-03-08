@@ -222,7 +222,55 @@
   .footer-logo span { color: var(--green); }
   .footer-copy { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; letter-spacing: 0.12em; color: #737373; }
 
-  /* ADMIN BAR */
+  /* DARK MODE */
+  body.dark-mode {
+    --bg: #0f0f0e;
+    --bg2: #161614;
+    --card: #1a1a18;
+    --card2: #1e1e1c;
+    --charcoal: #f0f0ed;
+    --dark: #d4d4d0;
+    --white: #1a1a18;
+    --muted: #8a8a82;
+    --muted2: #666660;
+    --border: #2a2a26;
+    --border-strong: #3a3a36;
+    --shadow: rgba(0,0,0,0.35);
+    --shadow-md: rgba(0,0,0,0.5);
+  }
+  body.dark-mode { background: var(--bg); color: var(--charcoal); }
+  body.dark-mode nav { background: rgba(15,15,14,0.92); }
+  body.dark-mode body::before { opacity: 0.06; }
+  body.dark-mode .service-card,
+  body.dark-mode .blog-card,
+  body.dark-mode .result-card,
+  body.dark-mode .paraquien-item,
+  body.dark-mode .contact-link,
+  body.dark-mode .overlay-box,
+  body.dark-mode .quiz-option { background: var(--card); }
+  body.dark-mode section { background: var(--bg); }
+  body.dark-mode section:nth-child(even) { background: var(--bg2); }
+  body.dark-mode #hero { background: var(--bg); }
+  body.dark-mode .hero-title,
+  body.dark-mode .section-title,
+  body.dark-mode .service-name,
+  body.dark-mode .blog-title-card,
+  body.dark-mode .contact-big-title { color: var(--charcoal); }
+  body.dark-mode .about-text p,
+  body.dark-mode .hero-sub,
+  body.dark-mode .service-desc,
+  body.dark-mode .blog-excerpt,
+  body.dark-mode .contact-text p { color: var(--muted); }
+  body.dark-mode .blog-cover-placeholder { background: var(--card2); }
+  body.dark-mode .quiz-result-summary { background: var(--card); }
+
+  /* DARK TOGGLE BUTTON */
+  .dark-toggle { width: 38px; height: 22px; border-radius: 11px; background: var(--border-strong); border: none; cursor: pointer; position: relative; transition: background 0.3s; flex-shrink: 0; }
+  .dark-toggle::after { content: ''; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: var(--muted); transition: transform 0.3s, background 0.3s; }
+  body.dark-mode .dark-toggle { background: var(--green); }
+  body.dark-mode .dark-toggle::after { transform: translateX(16px); background: #fff; }
+  .dark-toggle-wrap { display: flex; align-items: center; gap: 0.5rem; }
+  .dark-toggle-icon { font-size: 0.85rem; line-height: 1; }
   #admin-bar { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 150; background: var(--charcoal); border-top: 2px solid var(--green); padding: 0.9rem 4vw; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
   body.admin-mode #admin-bar { display: flex; }
   .admin-bar-label { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green); display: flex; align-items: center; gap: 0.6rem; }
@@ -345,6 +393,10 @@
     <li><a href="#contact">Contacto</a></li>
   </ul>
   <div class="nav-right">
+    <div class="dark-toggle-wrap">
+      <span class="dark-toggle-icon" id="dark-icon">☀️</span>
+      <button class="dark-toggle" id="dark-toggle" onclick="toggleDark()" title="Modo oscuro/claro" aria-label="Cambiar tema"></button>
+    </div>
     <button class="nav-admin-btn" id="nav-admin-btn" onclick="openLogin()">⚙ Admin</button>
     <a href="#contact" class="nav-cta">Contactar</a>
   </div>
@@ -975,6 +1027,20 @@ function initCounters() {
   }, { threshold: 0.5 });
   counters.forEach(el => obs.observe(el));
 }
+
+/* ─── DARK MODE ─── */
+function toggleDark() {
+  const isDark = document.body.classList.toggle('dark-mode');
+  document.getElementById('dark-icon').textContent = isDark ? '🌙' : '☀️';
+  localStorage.setItem('rl_theme', isDark ? 'dark' : 'light');
+}
+(function initTheme() {
+  const saved = localStorage.getItem('rl_theme');
+  if (saved === 'dark') {
+    document.body.classList.add('dark-mode');
+    document.getElementById('dark-icon').textContent = '🌙';
+  }
+})();
 
 /* ─── QUIZ ── */
 const quizAnswers = {};
