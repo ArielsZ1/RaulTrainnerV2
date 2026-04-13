@@ -803,10 +803,26 @@
   </div>
 </div>
 
+<!-- ── FIREBASE SDK (compat, via CDN) ── -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
 <script>
+/* ─── FIREBASE INIT ── */
+const firebaseConfig = {
+  apiKey: "AIzaSyDDwAnr_5ozYWLd59la1V3DN_RRvXmXhAE",
+  authDomain: "raul-lencina-trainer.firebaseapp.com",
+  projectId: "raul-lencina-trainer",
+  storageBucket: "raul-lencina-trainer.firebasestorage.app",
+  messagingSenderId: "425156793815",
+  appId: "1:425156793815:web:c891ddc9e20b07a6082792"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const postsCol = db.collection('posts');
+
 /* ─── CONFIG ── */
 const ADMIN_PASS = 'raul2025';
-const STORAGE_KEY = 'rl_blog_v2';
 
 /* ─── STATE ── */
 let posts = [];
@@ -814,24 +830,38 @@ let isAdmin = false;
 let editingId = null;
 let deletingId = null;
 
-/* ─── STORAGE ── */
+/* ─── FIRESTORE: ESCUCHA EN TIEMPO REAL ── */
+// onSnapshot actúa como un "vigilante permanente": cada vez que alguien
+// agrega, edita o borra un artículo en Firestore, esta función se dispara
+// automáticamente en todos los navegadores que tengan la página abierta.
 function loadPosts() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) { posts = JSON.parse(raw); return; }
-  } catch(e) {}
-  const now = new Date();
-  const fmt = d => d.toLocaleDateString('es-AR', {day:'numeric', month:'short', year:'numeric'});
-  posts = [
-    { id: 3, cat: 'Hábitos', title: 'Por qué el descanso es parte del entrenamiento', excerpt: 'El sueño y la recuperación como herramienta activa de rendimiento.', body: 'El músculo no crece en el gimnasio, crece mientras dormís. Durante el sueño profundo se libera hormona de crecimiento y ocurre la mayor parte de la síntesis proteica muscular.\n\nIgnorar el descanso es como regar una planta y no darle luz. Dormir bien no es pereza, es parte del protocolo.', featured: false, date: fmt(new Date(now - 6*24*60*60*1000)), img: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=800&q=80' },
-    { id: 2, cat: 'Nutrición', title: 'Proteína: cuánto necesitás realmente', excerpt: 'Mitos y verdades sobre el consumo proteico. La evidencia actual, simplificada.', body: 'El debate sobre la proteína en el fitness está lleno de mitos. La evidencia actual sugiere que para la mayoría de las personas activas, entre 1.6 y 2.2 g de proteína por kilogramo de peso corporal es suficiente.\n\nMás no siempre es mejor. Lo importante es la distribución a lo largo del día y la calidad de las fuentes proteicas.', featured: false, date: fmt(new Date(now - 3*24*60*60*1000)), img: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80' },
-    { id: 1, cat: 'Entrenamiento', title: 'La ciencia detrás de la hipertrofia: por qué el músculo crece', excerpt: 'Entender cómo y por qué el músculo crece es la base de un entrenamiento inteligente. Exploramos los mecanismos biológicos.', body: 'La hipertrofia muscular es el aumento del tamaño de las células musculares, y ocurre como respuesta adaptativa al estrés mecánico durante el entrenamiento.\n\nExisten tres mecanismos principales: tensión mecánica (el peso y la carga), daño muscular (las microrroturas que generan inflamación y reconstrucción) y estrés metabólico (la acumulación de metabolitos durante el ejercicio).\n\nEntender esto te permite diseñar tu entrenamiento de forma más inteligente: no se trata de hacer siempre más, sino de hacer lo correcto.', featured: true, date: fmt(now), img: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80' }
-  ];
-  savePosts();
+  postsCol.orderBy('id', 'desc').onSnapshot(snapshot => {
+    posts = snapshot.docs.map(doc => ({ ...doc.data(), firestoreId: doc.id }));
+    if (posts.length === 0) {
+      // Primera vez: poblar la BD con los artículos de ejemplo
+      seedDefaultPosts();
+    } else {
+      renderBlog();
+    }
+  }, err => {
+    console.error('Error cargando artículos:', err);
+    renderBlog(); // Mostrar grilla vacía si hay error
+  });
 }
 
-function savePosts() {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(posts)); } catch(e) {}
+/* ─── SEED: Artículos iniciales (solo si la BD está vacía) ── */
+async function seedDefaultPosts() {
+  const now = new Date();
+  const fmt = d => d.toLocaleDateString('es-AR', {day:'numeric', month:'short', year:'numeric'});
+  const defaults = [
+    { id: Date.now() - 6000, cat: 'Hábitos', title: 'Por qué el descanso es parte del entrenamiento', excerpt: 'El sueño y la recuperación como herramienta activa de rendimiento.', body: 'El músculo no crece en el gimnasio, crece mientras dormís. Durante el sueño profundo se libera hormona de crecimiento y ocurre la mayor parte de la síntesis proteica muscular.\n\nIgnorar el descanso es como regar una planta y no darle luz. Dormir bien no es pereza, es parte del protocolo.', featured: false, date: fmt(new Date(now - 6*24*60*60*1000)), img: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=800&q=80' },
+    { id: Date.now() - 3000, cat: 'Nutrición', title: 'Proteína: cuánto necesitás realmente', excerpt: 'Mitos y verdades sobre el consumo proteico. La evidencia actual, simplificada.', body: 'El debate sobre la proteína en el fitness está lleno de mitos. La evidencia actual sugiere que para la mayoría de las personas activas, entre 1.6 y 2.2 g de proteína por kilogramo de peso corporal es suficiente.\n\nMás no siempre es mejor. Lo importante es la distribución a lo largo del día y la calidad de las fuentes proteicas.', featured: false, date: fmt(new Date(now - 3*24*60*60*1000)), img: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80' },
+    { id: Date.now(), cat: 'Entrenamiento', title: 'La ciencia detrás de la hipertrofia: por qué el músculo crece', excerpt: 'Entender cómo y por qué el músculo crece es la base de un entrenamiento inteligente. Exploramos los mecanismos biológicos.', body: 'La hipertrofia muscular es el aumento del tamaño de las células musculares, y ocurre como respuesta adaptativa al estrés mecánico durante el entrenamiento.\n\nExisten tres mecanismos principales: tensión mecánica (el peso y la carga), daño muscular (las microrroturas que generan inflamación y reconstrucción) y estrés metabólico (la acumulación de metabolitos durante el ejercicio).\n\nEntender esto te permite diseñar tu entrenamiento de forma más inteligente: no se trata de hacer siempre más, sino de hacer lo correcto.', featured: true, date: fmt(now), img: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80' }
+  ];
+  const batch = db.batch();
+  defaults.forEach(p => { const ref = postsCol.doc(); batch.set(ref, p); });
+  await batch.commit();
+  // onSnapshot se dispara solo luego del commit — no hace falta llamar renderBlog() acá
 }
 
 /* ─── RENDER BLOG ── */
@@ -956,29 +986,45 @@ function openEditor(id) {
   setTimeout(() => document.getElementById('f-title').focus(), 120);
 }
 
-function savePost() {
+async function savePost() {
   const title   = document.getElementById('f-title').value.trim();
   const excerpt = document.getElementById('f-excerpt').value.trim();
   const body    = document.getElementById('f-body').value.trim();
   const img     = document.getElementById('f-img').value.trim();
   if (!title || !body) { alert('El título y el contenido son obligatorios.'); return; }
   const dateStr = new Date().toLocaleDateString('es-AR', {day:'numeric', month:'short', year:'numeric'});
+  const data = {
+    cat: document.getElementById('f-cat').value,
+    featured: document.getElementById('f-featured').value === '1',
+    title,
+    excerpt: excerpt || title,
+    body,
+    img
+  };
   if (editingId) {
-    const idx = posts.findIndex(x => x.id === editingId);
-    posts[idx] = { ...posts[idx], cat: document.getElementById('f-cat').value, featured: document.getElementById('f-featured').value === '1', title, excerpt: excerpt || title, body, img };
+    // Actualizar artículo existente en Firestore
+    const post = posts.find(x => x.id === editingId);
+    if (post && post.firestoreId) {
+      await postsCol.doc(post.firestoreId).update(data);
+    }
   } else {
-    posts.unshift({ id: Date.now(), cat: document.getElementById('f-cat').value, featured: document.getElementById('f-featured').value === '1', title, excerpt: excerpt || title, body, img, date: dateStr });
+    // Crear artículo nuevo en Firestore
+    data.id = Date.now(); // timestamp como ID numérico para ordenar
+    data.date = dateStr;
+    await postsCol.add(data);
   }
-  savePosts();
-  renderBlog();
+  // onSnapshot se encarga de re-renderizar automáticamente
   closeOverlay('editor-overlay');
 }
 
 /* ─── DELETE ── */
 function askDelete(id) { deletingId = id; openOverlay('delete-overlay'); }
-function confirmDelete() {
-  posts = posts.filter(x => x.id !== deletingId);
-  savePosts(); renderBlog();
+async function confirmDelete() {
+  const post = posts.find(x => x.id === deletingId);
+  if (post && post.firestoreId) {
+    await postsCol.doc(post.firestoreId).delete();
+  }
+  // onSnapshot se encarga de re-renderizar automáticamente
   closeOverlay('delete-overlay');
   deletingId = null;
 }
@@ -1125,8 +1171,8 @@ function resetQuiz() {
 }
 
 /* ─── INIT ── */
+// loadPosts() inicia el listener de Firestore, que llama a renderBlog() automáticamente
 loadPosts();
-renderBlog();
 initReveal();
 initCounters();
 </script>
