@@ -15,19 +15,33 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Raúl Lencina — Personal Trainer">
 <meta property="og:description" content="Entrenamiento personalizado y nutrición basada en ciencia. Resultados reales en Misiones.">
-<meta property="og:image" content="logo.jpg">
+<meta property="og:image" content="https://raul-trainner-v2.vercel.app/Imagenes/RuloFitLogo.jpeg">
 <meta property="og:url" content="https://raul-trainner-v2.vercel.app">
 <meta property="og:locale" content="es_AR">
+<link rel="canonical" href="https://raul-trainner-v2.vercel.app">
 
 <!-- ── TWITTER CARD ── -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Raúl Lencina — Personal Trainer">
 <meta name="twitter:description" content="Entrenamiento personalizado y nutrición basada en ciencia.">
-<meta name="twitter:image" content="logo.jpg">
+<meta name="twitter:image" content="https://raul-trainner-v2.vercel.app/Imagenes/RuloFitLogo.jpeg">
 
 <!-- ── FAVICON ── -->
-<link rel="icon" href="logo.png" type="image/png">
-<link rel="apple-touch-icon" href="logo.png">
+<link rel="icon" href="Imagenes/RuloFitLogo.jpeg" type="image/jpeg">
+<link rel="apple-touch-icon" href="Imagenes/RuloFitLogo.jpeg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Raúl Lencina — Personal Trainer",
+  "description": "Entrenamiento personalizado y asesoría nutricional en Misiones.",
+  "url": "https://raul-trainner-v2.vercel.app",
+  "image": "https://raul-trainner-v2.vercel.app/Imagenes/RuloFitLogo.jpeg",
+  "areaServed": "Misiones, Argentina",
+  "sameAs": ["https://www.instagram.com/raullencina7"]
+}
+</script>
 
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -65,8 +79,17 @@
   .nav-right { display: flex; gap: 0.8rem; align-items: center; }
   .nav-cta { font-family: 'Montserrat', sans-serif; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: #fff; background: var(--green); border: none; padding: 0.6rem 1.3rem; cursor: pointer; text-decoration: none; transition: background 0.2s; font-weight: 600; }
   .nav-cta:hover { background: #15803d; }
-  .nav-admin-btn { font-family: 'Montserrat', sans-serif; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); background: transparent; border: 1px solid var(--border-strong); padding: 0.5rem 1rem; cursor: pointer; transition: color 0.2s, border-color 0.2s; font-weight: 500; }
+  .nav-admin-btn { display: none; font-family: 'Montserrat', sans-serif; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); background: transparent; border: 1px solid var(--border-strong); padding: 0.5rem 1rem; cursor: pointer; transition: color 0.2s, border-color 0.2s; font-weight: 500; }
   .nav-admin-btn:hover { color: var(--charcoal); border-color: var(--charcoal); }
+  .nav-admin-btn.visible { display: inline-block; }
+  .nav-burger { display: none; width: 42px; height: 42px; background: transparent; border: 1px solid var(--border-strong); cursor: pointer; align-items: center; justify-content: center; flex-direction: column; gap: 5px; }
+  .nav-burger span { display: block; width: 18px; height: 2px; background: var(--charcoal); }
+  .quiz-disclaimer { font-size: 0.8rem; color: var(--muted2); line-height: 1.6; margin-top: 1.5rem; text-align: center; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal, .reveal-left, .reveal-right { opacity: 1; transform: none; }
+  }
 
   /* HERO */
   #hero { position: relative; min-height: 100vh; display: flex; align-items: center; padding: 10rem 4vw 6rem; z-index: 1; overflow: hidden; background: var(--bg); }
@@ -372,11 +395,26 @@
     .blog-card.featured .blog-cover-placeholder { height: 200px; border-right: none; border-bottom: 1px solid var(--border); }
     .hero-stats { position: static; margin-top: 3rem; }
     .results-grid { grid-template-columns: 1fr; }
-    nav .nav-links { display: none; }
+    .nav-burger { display: flex; }
+    nav .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      gap: 0;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0.6rem 4vw 1rem;
+    }
+    nav .nav-links.open { display: flex; }
+    nav .nav-links a { display: block; padding: 0.85rem 0; border-bottom: 1px solid var(--border); }
     .form-row { grid-template-columns: 1fr; }
     .lead-inner { padding: 2rem; }
   }
 </style>
+<script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 <div class="cell-bg"></div>
@@ -384,7 +422,7 @@
 <!-- NAV -->
 <nav>
   <a href="#hero" class="nav-logo"><img src="Imagenes/RuloFitLogo.jpeg" alt="Raúl Lencina" style="height: 40px;"></a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="nav-links">
     <li><a href="#about">Sobre mí</a></li>
     <li><a href="#para-quien">¿Para quién?</a></li>
     <li><a href="#services">Servicios</a></li>
@@ -399,6 +437,9 @@
     </div>
     <button class="nav-admin-btn" id="nav-admin-btn" onclick="openLogin()">⚙ Admin</button>
     <a href="#contact" class="nav-cta">Contactar</a>
+    <button class="nav-burger" id="nav-burger" type="button" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
@@ -490,7 +531,7 @@
     <div class="paraquien-cta-block reveal-right">
       <div class="paraquien-cta-title">¿TE IDENTIFICÁS<br><span>CON ALGO?</span></div>
       <p class="paraquien-cta-text">Escribime sin compromiso. En una charla corta te cuento cómo trabajamos y si es el momento indicado para arrancar.</p>
-      <a href="https://wa.me/5493764828210" target="_blank" class="btn-primary">💬 Escribime por WhatsApp</a>
+      <a href="https://wa.me/5493764828210" target="_blank" rel="noopener noreferrer" class="btn-primary">💬 Escribime por WhatsApp</a>
     </div>
   </div>
 </section>
@@ -501,7 +542,7 @@
     <div>
       <div class="lead-badge">🎁 Descarga gratuita</div>
       <h2 class="lead-title">LA GUÍA DE LOS <span>5 ERRORES</span> AL EMPEZAR EL GYM</h2>
-      <p class="lead-desc">Errores que el 90% de las personas comete al empezar a entrenar y que los frenan sin que se den cuenta. Descargala gratis y empezá con ventaja.</p>
+      <p class="lead-desc">Errores que el 90% de las personas comete al empezar a entrenar y que los frenan sin que se den cuenta. Pedila gratis por WhatsApp y empezá con ventaja.</p>
     </div>
     <div class="lead-visual">
       <div class="lead-guide-card">
@@ -515,7 +556,7 @@
           <div class="lead-guide-item">Error #4: No registrar el progreso</div>
           <div class="lead-guide-item">Error #5: Querer resultados rápidos</div>
         </div>
-        <button class="lead-cta" onclick="downloadGuide()">📥 Descargar gratis por WhatsApp</button>
+        <button class="lead-cta" onclick="downloadGuide()">📥 Pedila gratis por WhatsApp</button>
       </div>
     </div>
   </div>
@@ -670,6 +711,7 @@
       </div>
     </div>
 
+    <p class="quiz-disclaimer">Este cuestionario no es un diagnóstico médico ni un plan nutricional. Si tenés una lesión o una condición de salud, consultá también con un profesional de la salud.</p>
   </div>
 </section>
 
@@ -683,12 +725,12 @@
       <p class="section-label">Contacto</p>
       <p>¿Listo para empezar? Escribime por WhatsApp o seguime en Instagram. Te respondo a la brevedad y coordinamos una charla sin compromiso.</p>
       <div class="contact-links">
-        <a href="https://wa.me/5493764828210" target="_blank" class="contact-link">
+        <a href="https://wa.me/5493764828210" target="_blank" rel="noopener noreferrer" class="contact-link">
           <div class="contact-link-icon">💬</div>
           <div class="contact-link-info"><div class="contact-link-name">WhatsApp</div><div class="contact-link-handle">+54 9 376 482-8210</div></div>
           <span class="contact-link-arrow">→</span>
         </a>
-        <a href="https://www.instagram.com/raullencina7" target="_blank" class="contact-link">
+        <a href="https://www.instagram.com/raullencina7" target="_blank" rel="noopener noreferrer" class="contact-link">
           <div class="contact-link-icon">📸</div>
           <div class="contact-link-info"><div class="contact-link-name">Instagram</div><div class="contact-link-handle">@raullencina7</div></div>
           <span class="contact-link-arrow">→</span>
@@ -700,7 +742,7 @@
 
 <footer>
   <div class="footer-logo"><img src="Imagenes/RuloFitLogo.jpeg" alt="Raúl Lencina" style="height: 30px;"></div>
-  <div class="footer-copy">© 2025 Raúl Lencina · Personal Trainer & Nutrición · Misiones, Argentina</div>
+  <div class="footer-copy">© 2026 Raúl Lencina · Personal Trainer & Nutrición · Misiones, Argentina</div>
   <div class="footer-copy">Diseñado para evolucionar</div>
 </footer>
 
@@ -709,6 +751,7 @@
   <span class="admin-bar-label">Modo administrador activo</span>
   <div class="admin-bar-actions">
     <button class="admin-btn-new" onclick="openEditor(null)">+ Nuevo artículo</button>
+    <button class="admin-btn-new" id="admin-seed-btn" onclick="seedDefaultPosts()" style="background:transparent;border:1px solid var(--green);display:none;">Cargar ejemplos</button>
     <button class="admin-btn-exit" onclick="exitAdmin()">Salir del panel</button>
   </div>
 </div>
@@ -718,11 +761,15 @@
   <div class="overlay-box" style="max-width:400px;">
     <button class="overlay-close" onclick="closeOverlay('login-overlay')">✕</button>
     <div class="overlay-title">ACCESO ADMIN</div>
-    <p class="login-subtitle">Ingresá la contraseña para gestionar el blog.</p>
+    <p class="login-subtitle">Las credenciales están en Firebase Authentication, no en esta página. Ingresá el email y la contraseña del administrador.</p>
+    <div class="form-group">
+      <label class="form-label">Email</label>
+      <input class="form-input" type="email" id="login-email" autocomplete="username" placeholder="admin@email.com" onkeydown="if(event.key==='Enter')tryLogin()">
+    </div>
     <div class="form-group">
       <label class="form-label">Contraseña</label>
-      <input class="form-input" type="password" id="login-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')tryLogin()">
-      <div class="login-error" id="login-error">Contraseña incorrecta. Intentá de nuevo.</div>
+      <input class="form-input" type="password" id="login-pass" autocomplete="current-password" placeholder="••••••••" onkeydown="if(event.key==='Enter')tryLogin()">
+      <div class="login-error" id="login-error">Email o contraseña incorrectos. Intentá de nuevo.</div>
     </div>
     <div class="form-actions">
       <button class="form-submit" onclick="tryLogin()">Ingresar</button>
@@ -803,10 +850,26 @@
   </div>
 </div>
 
+<!-- ── FIREBASE SDK (compat, via CDN) ── -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
 <script>
-/* ─── CONFIG ── */
-const ADMIN_PASS = 'raul2025';
-const STORAGE_KEY = 'rl_blog_v2';
+/* ─── FIREBASE INIT ── */
+const firebaseConfig = {
+  apiKey: "AIzaSyDDwAnr_5ozYWLd59la1V3DN_RRvXmXhAE",
+  authDomain: "raul-lencina-trainer.firebaseapp.com",
+  projectId: "raul-lencina-trainer",
+  storageBucket: "raul-lencina-trainer.firebasestorage.app",
+  messagingSenderId: "425156793815",
+  appId: "1:425156793815:web:c891ddc9e20b07a6082792"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const auth = firebase.auth();
+const postsCol = db.collection('posts');
+const ADMIN_UID = 'DACAHK8VG5YBFJWFiEpKnNPMI4i2';
 
 /* ─── STATE ── */
 let posts = [];
@@ -814,78 +877,169 @@ let isAdmin = false;
 let editingId = null;
 let deletingId = null;
 
-/* ─── STORAGE ── */
+/* ─── FIRESTORE: ESCUCHA EN TIEMPO REAL ── */
+// onSnapshot actúa como un "vigilante permanente": cada vez que alguien
+// agrega, edita o borra un artículo en Firestore, esta función se dispara
+// automáticamente en todos los navegadores que tengan la página abierta.
 function loadPosts() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) { posts = JSON.parse(raw); return; }
-  } catch(e) {}
-  const now = new Date();
-  const fmt = d => d.toLocaleDateString('es-AR', {day:'numeric', month:'short', year:'numeric'});
-  posts = [
-    { id: 3, cat: 'Hábitos', title: 'Por qué el descanso es parte del entrenamiento', excerpt: 'El sueño y la recuperación como herramienta activa de rendimiento.', body: 'El músculo no crece en el gimnasio, crece mientras dormís. Durante el sueño profundo se libera hormona de crecimiento y ocurre la mayor parte de la síntesis proteica muscular.\n\nIgnorar el descanso es como regar una planta y no darle luz. Dormir bien no es pereza, es parte del protocolo.', featured: false, date: fmt(new Date(now - 6*24*60*60*1000)), img: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=800&q=80' },
-    { id: 2, cat: 'Nutrición', title: 'Proteína: cuánto necesitás realmente', excerpt: 'Mitos y verdades sobre el consumo proteico. La evidencia actual, simplificada.', body: 'El debate sobre la proteína en el fitness está lleno de mitos. La evidencia actual sugiere que para la mayoría de las personas activas, entre 1.6 y 2.2 g de proteína por kilogramo de peso corporal es suficiente.\n\nMás no siempre es mejor. Lo importante es la distribución a lo largo del día y la calidad de las fuentes proteicas.', featured: false, date: fmt(new Date(now - 3*24*60*60*1000)), img: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80' },
-    { id: 1, cat: 'Entrenamiento', title: 'La ciencia detrás de la hipertrofia: por qué el músculo crece', excerpt: 'Entender cómo y por qué el músculo crece es la base de un entrenamiento inteligente. Exploramos los mecanismos biológicos.', body: 'La hipertrofia muscular es el aumento del tamaño de las células musculares, y ocurre como respuesta adaptativa al estrés mecánico durante el entrenamiento.\n\nExisten tres mecanismos principales: tensión mecánica (el peso y la carga), daño muscular (las microrroturas que generan inflamación y reconstrucción) y estrés metabólico (la acumulación de metabolitos durante el ejercicio).\n\nEntender esto te permite diseñar tu entrenamiento de forma más inteligente: no se trata de hacer siempre más, sino de hacer lo correcto.', featured: true, date: fmt(now), img: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80' }
-  ];
-  savePosts();
+  postsCol.orderBy('id', 'desc').onSnapshot(snapshot => {
+    posts = snapshot.docs.map(doc => ({ ...doc.data(), firestoreId: doc.id }));
+    renderBlog();
+    syncAdminUi();
+  }, err => {
+    console.error('Error cargando artículos:', err);
+    renderBlog();
+  });
 }
 
-function savePosts() {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(posts)); } catch(e) {}
+/* ─── SEED: Artículos iniciales (solo si la BD está vacía) ── */
+async function seedDefaultPosts() {
+  if (!isAuthorizedAdmin() || posts.length > 0) return;
+  const now = new Date();
+  const fmt = d => d.toLocaleDateString('es-AR', {day:'numeric', month:'short', year:'numeric'});
+  const defaults = [
+    { id: Date.now() - 6000, cat: 'Hábitos', title: 'Por qué el descanso es parte del entrenamiento', excerpt: 'El sueño y la recuperación como herramienta activa de rendimiento.', body: 'El músculo no crece en el gimnasio, crece mientras dormís. Durante el sueño profundo se libera hormona de crecimiento y ocurre la mayor parte de la síntesis proteica muscular.\n\nIgnorar el descanso es como regar una planta y no darle luz. Dormir bien no es pereza, es parte del protocolo.', featured: false, date: fmt(new Date(now - 6*24*60*60*1000)), img: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=800&q=80' },
+    { id: Date.now() - 3000, cat: 'Nutrición', title: 'Proteína: cuánto necesitás realmente', excerpt: 'Mitos y verdades sobre el consumo proteico. La evidencia actual, simplificada.', body: 'El debate sobre la proteína en el fitness está lleno de mitos. La evidencia actual sugiere que para la mayoría de las personas activas, entre 1.6 y 2.2 g de proteína por kilogramo de peso corporal es suficiente.\n\nMás no siempre es mejor. Lo importante es la distribución a lo largo del día y la calidad de las fuentes proteicas.', featured: false, date: fmt(new Date(now - 3*24*60*60*1000)), img: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80' },
+    { id: Date.now(), cat: 'Entrenamiento', title: 'La ciencia detrás de la hipertrofia: por qué el músculo crece', excerpt: 'Entender cómo y por qué el músculo crece es la base de un entrenamiento inteligente. Exploramos los mecanismos biológicos.', body: 'La hipertrofia muscular es el aumento del tamaño de las células musculares, y ocurre como respuesta adaptativa al estrés mecánico durante el entrenamiento.\n\nExisten tres mecanismos principales: tensión mecánica (el peso y la carga), daño muscular (las microrroturas que generan inflamación y reconstrucción) y estrés metabólico (la acumulación de metabolitos durante el ejercicio).\n\nEntender esto te permite diseñar tu entrenamiento de forma más inteligente: no se trata de hacer siempre más, sino de hacer lo correcto.', featured: true, date: fmt(now), img: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80' }
+  ];
+  try {
+    const batch = db.batch();
+    defaults.forEach(p => { const ref = postsCol.doc(); batch.set(ref, p); });
+    await batch.commit();
+  } catch (error) {
+    console.error('Error cargando artículos de ejemplo:', error);
+    alert('No se pudieron cargar los artículos de ejemplo. Revisá la conexión e intentá de nuevo.');
+  }
+  // onSnapshot se dispara solo luego del commit — no hace falta llamar renderBlog() acá
 }
 
 /* ─── RENDER BLOG ── */
 function renderBlog() {
   const grid = document.getElementById('blog-grid');
+  grid.replaceChildren();
   if (!posts.length) {
-    grid.innerHTML = `<div class="blog-empty"><div class="blog-empty-icon">✍️</div><p>No hay artículos todavía.<br>Entrá al panel admin para publicar el primero.</p></div>`;
+    const empty = document.createElement('div');
+    empty.className = 'blog-empty';
+    const icon = document.createElement('div');
+    icon.className = 'blog-empty-icon';
+    icon.textContent = '✍️';
+    const p = document.createElement('p');
+    p.innerHTML = 'No hay artículos todavía.<br>Entrá al panel admin para publicar el primero.';
+    empty.append(icon, p);
+    grid.appendChild(empty);
     return;
   }
-  const sorted = [...posts].sort((a,b) => b.id - a.id);
+  const sorted = [...posts].sort((a,b) => Number(b.id) - Number(a.id));
   const featIdx = sorted.findIndex(p => p.featured);
   if (featIdx > 0) { const [f] = sorted.splice(featIdx, 1); sorted.unshift(f); }
 
-  grid.innerHTML = sorted.map((p, i) => {
-    const isFeat = p.featured && i === 0;
-    const coverHtml = p.img
-      ? `<img class="blog-cover" src="${esc(p.img)}" alt="${esc(p.title)}" loading="lazy" onerror="this.style.display='none'">`
-      : `<div class="blog-cover-placeholder"><span class="blog-cover-placeholder-icon">📝</span></div>`;
-    return `
-    <div class="blog-card${isFeat?' featured':''}" onclick="readPost(${p.id})">
-      ${coverHtml}
-      <div class="blog-body">
-        <div class="blog-cat">${esc(p.cat)}</div>
-        <h3 class="blog-title-card">${esc(p.title)}</h3>
-        <p class="blog-excerpt">${esc(p.excerpt)}</p>
-        <div class="blog-meta">
-          <span class="blog-date">${esc(p.date)}</span>
-          <div class="blog-actions">
-            <button class="blog-edit-btn" onclick="event.stopPropagation();openEditor(${p.id})">✎ Editar</button>
-            <button class="blog-del-btn" onclick="event.stopPropagation();askDelete(${p.id})">✕ Borrar</button>
-            <button class="blog-share" onclick="event.stopPropagation();sharePost('${esc(p.title)}')">↗ Compartir</button>
-          </div>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
+  sorted.forEach((p, i) => {
+    const postId = Number(p.id);
+    const card = document.createElement('div');
+    card.className = 'blog-card' + (p.featured && i === 0 ? ' featured' : '');
+    card.addEventListener('click', () => { if (Number.isFinite(postId)) readPost(postId); });
+
+    const imgUrl = safeImgUrl(p.img);
+    if (imgUrl) {
+      const img = document.createElement('img');
+      img.className = 'blog-cover';
+      img.src = imgUrl;
+      img.alt = p.title || '';
+      img.loading = 'lazy';
+      img.addEventListener('error', () => { img.style.display = 'none'; });
+      card.appendChild(img);
+    } else {
+      const ph = document.createElement('div');
+      ph.className = 'blog-cover-placeholder';
+      const ic = document.createElement('span');
+      ic.className = 'blog-cover-placeholder-icon';
+      ic.textContent = '📝';
+      ph.appendChild(ic);
+      card.appendChild(ph);
+    }
+
+    const body = document.createElement('div');
+    body.className = 'blog-body';
+    const cat = document.createElement('div');
+    cat.className = 'blog-cat';
+    cat.textContent = p.cat || '';
+    const title = document.createElement('h3');
+    title.className = 'blog-title-card';
+    title.textContent = p.title || '';
+    const excerpt = document.createElement('p');
+    excerpt.className = 'blog-excerpt';
+    excerpt.textContent = p.excerpt || '';
+
+    const meta = document.createElement('div');
+    meta.className = 'blog-meta';
+    const date = document.createElement('span');
+    date.className = 'blog-date';
+    date.textContent = p.date || '';
+    const actions = document.createElement('div');
+    actions.className = 'blog-actions';
+
+    const editBtn = document.createElement('button');
+    editBtn.className = 'blog-edit-btn';
+    editBtn.textContent = '✎ Editar';
+    editBtn.addEventListener('click', (e) => { e.stopPropagation(); openEditor(postId); });
+    const delBtn = document.createElement('button');
+    delBtn.className = 'blog-del-btn';
+    delBtn.textContent = '✕ Borrar';
+    delBtn.addEventListener('click', (e) => { e.stopPropagation(); askDelete(postId); });
+    const shareBtn = document.createElement('button');
+    shareBtn.className = 'blog-share';
+    shareBtn.textContent = '↗ Compartir';
+    shareBtn.addEventListener('click', (e) => { e.stopPropagation(); sharePost(p.title); });
+
+    actions.append(editBtn, delBtn, shareBtn);
+    meta.append(date, actions);
+    body.append(cat, title, excerpt, meta);
+    card.appendChild(body);
+    grid.appendChild(card);
+  });
 }
 
-function esc(s) {
-  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+function safeImgUrl(url) {
+  if (!url) return '';
+  try {
+    const u = new URL(String(url), location.href);
+    if (u.protocol === 'https:') return u.href;
+  } catch (e) {}
+  return '';
 }
 
 /* ─── READ ── */
 function readPost(id) {
-  const p = posts.find(x => x.id === id);
+  const p = posts.find(x => Number(x.id) === Number(id));
   if (!p) return;
-  const bodyHtml = p.body.split(/\n\n+/).map(par => `<p>${esc(par.trim())}</p>`).join('');
-  const coverHtml = p.img ? `<img class="modal-cover" src="${esc(p.img)}" alt="${esc(p.title)}" onerror="this.style.display='none'">` : '';
-  document.getElementById('read-content').innerHTML =
-    `${coverHtml}
-     <div class="modal-cat">${esc(p.cat)}</div>
-     <div class="modal-title">${esc(p.title)}</div>
-     <div class="modal-date">${esc(p.date)}</div>
-     <div class="modal-body">${bodyHtml}</div>`;
+  const root = document.getElementById('read-content');
+  root.replaceChildren();
+  const imgUrl = safeImgUrl(p.img);
+  if (imgUrl) {
+    const cover = document.createElement('img');
+    cover.className = 'modal-cover';
+    cover.src = imgUrl;
+    cover.alt = p.title || '';
+    cover.addEventListener('error', () => { cover.style.display = 'none'; });
+    root.appendChild(cover);
+  }
+  const cat = document.createElement('div');
+  cat.className = 'modal-cat';
+  cat.textContent = p.cat || '';
+  const title = document.createElement('div');
+  title.className = 'modal-title';
+  title.textContent = p.title || '';
+  const date = document.createElement('div');
+  date.className = 'modal-date';
+  date.textContent = p.date || '';
+  const body = document.createElement('div');
+  body.className = 'modal-body';
+  String(p.body || '').split(/\n\n+/).forEach(par => {
+    const el = document.createElement('p');
+    el.textContent = par.trim();
+    body.appendChild(el);
+  });
+  root.append(cat, title, date, body);
   openOverlay('read-overlay');
 }
 
@@ -898,45 +1052,91 @@ function sharePost(title) {
 function previewImg() {
   const url = document.getElementById('f-img').value.trim();
   const preview = document.getElementById('img-preview');
-  if (url) { preview.src = url; preview.classList.add('show'); }
+  const safeUrl = safeImgUrl(url);
+  if (safeUrl) { preview.src = safeUrl; preview.classList.add('show'); }
   else { preview.classList.remove('show'); }
 }
 
 /* ─── AUTH ── */
+function syncAdminUi() {
+  const btn = document.getElementById('nav-admin-btn');
+  const seedBtn = document.getElementById('admin-seed-btn');
+  if (isAdmin) {
+    document.body.classList.add('admin-mode');
+    btn.textContent = '⚙ Salir';
+    btn.classList.add('visible');
+    if (seedBtn) seedBtn.style.display = posts.length === 0 ? 'inline-block' : 'none';
+  } else {
+    document.body.classList.remove('admin-mode');
+    btn.textContent = '⚙ Admin';
+    if (location.hash === '#admin') btn.classList.add('visible');
+    else btn.classList.remove('visible');
+    if (seedBtn) seedBtn.style.display = 'none';
+  }
+}
+
+function isAuthorizedAdmin() {
+  return isAdmin && auth.currentUser?.uid === ADMIN_UID;
+}
+
 function openLogin() {
-  if (isAdmin) { exitAdmin(); return; }
+  if (isAuthorizedAdmin()) { exitAdmin(); return; }
+  closeMobileMenu();
+  document.getElementById('login-email').value = '';
   document.getElementById('login-pass').value = '';
   document.getElementById('login-error').style.display = 'none';
   openOverlay('login-overlay');
-  setTimeout(() => document.getElementById('login-pass').focus(), 120);
+  setTimeout(() => document.getElementById('login-email').focus(), 120);
 }
 
-function tryLogin() {
-  if (document.getElementById('login-pass').value === ADMIN_PASS) {
+async function tryLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass = document.getElementById('login-pass').value;
+  const errBox = document.getElementById('login-error');
+  const submit = document.querySelector('#login-overlay .form-submit');
+  if (!email || !pass) {
+    errBox.textContent = 'Completá email y contraseña.';
+    errBox.style.display = 'block';
+    return;
+  }
+  submit.disabled = true;
+  try {
+    const credential = await auth.signInWithEmailAndPassword(email, pass);
+    if (credential.user.uid !== ADMIN_UID) {
+      await auth.signOut();
+      errBox.textContent = 'Esta cuenta no tiene permisos de administrador.';
+      errBox.style.display = 'block';
+      document.getElementById('login-pass').value = '';
+      document.getElementById('login-pass').focus();
+      return;
+    }
     closeOverlay('login-overlay');
-    isAdmin = true;
-    document.body.classList.add('admin-mode');
-    document.getElementById('nav-admin-btn').textContent = '⚙ Salir';
-  } else {
-    document.getElementById('login-error').style.display = 'block';
+  } catch (e) {
+    console.error('Error al iniciar sesión:', e);
+    errBox.textContent = 'Email o contraseña incorrectos. Intentá de nuevo.';
+    errBox.style.display = 'block';
     document.getElementById('login-pass').value = '';
     document.getElementById('login-pass').focus();
+  } finally {
+    submit.disabled = false;
   }
 }
 
 function exitAdmin() {
-  isAdmin = false;
-  document.body.classList.remove('admin-mode');
-  document.getElementById('nav-admin-btn').textContent = '⚙ Admin';
+  auth.signOut().catch(error => {
+    console.error('Error al cerrar sesión:', error);
+    alert('No se pudo cerrar la sesión. Intentá de nuevo.');
+  });
 }
 
 /* ─── EDITOR ── */
 function openEditor(id) {
+  if (!isAuthorizedAdmin()) return;
   editingId = id;
   document.getElementById('editor-heading').textContent = id ? 'EDITAR ARTÍCULO' : 'NUEVO ARTÍCULO';
   document.getElementById('img-preview').classList.remove('show');
   if (id) {
-    const p = posts.find(x => x.id === id);
+    const p = posts.find(x => Number(x.id) === Number(id));
     document.getElementById('f-cat').value = p.cat;
     document.getElementById('f-featured').value = p.featured ? '1' : '0';
     document.getElementById('f-title').value = p.title;
@@ -956,31 +1156,70 @@ function openEditor(id) {
   setTimeout(() => document.getElementById('f-title').focus(), 120);
 }
 
-function savePost() {
+async function savePost() {
+  if (!isAuthorizedAdmin()) return;
   const title   = document.getElementById('f-title').value.trim();
   const excerpt = document.getElementById('f-excerpt').value.trim();
   const body    = document.getElementById('f-body').value.trim();
   const img     = document.getElementById('f-img').value.trim();
   if (!title || !body) { alert('El título y el contenido son obligatorios.'); return; }
   const dateStr = new Date().toLocaleDateString('es-AR', {day:'numeric', month:'short', year:'numeric'});
-  if (editingId) {
-    const idx = posts.findIndex(x => x.id === editingId);
-    posts[idx] = { ...posts[idx], cat: document.getElementById('f-cat').value, featured: document.getElementById('f-featured').value === '1', title, excerpt: excerpt || title, body, img };
-  } else {
-    posts.unshift({ id: Date.now(), cat: document.getElementById('f-cat').value, featured: document.getElementById('f-featured').value === '1', title, excerpt: excerpt || title, body, img, date: dateStr });
+  const data = {
+    cat: document.getElementById('f-cat').value,
+    featured: document.getElementById('f-featured').value === '1',
+    title,
+    excerpt: excerpt || title,
+    body,
+    img: safeImgUrl(img)
+  };
+  const submit = document.querySelector('#editor-overlay .form-submit');
+  submit.disabled = true;
+  try {
+    if (editingId) {
+      const post = posts.find(x => Number(x.id) === Number(editingId));
+      if (!post || !post.firestoreId) throw new Error('No se encontró el artículo que se quería editar.');
+      await postsCol.doc(post.firestoreId).update(data);
+    } else {
+      data.id = Date.now();
+      data.date = dateStr;
+      await postsCol.add(data);
+    }
+    closeOverlay('editor-overlay');
+  } catch (error) {
+    console.error('Error guardando artículo:', error);
+    alert('No se pudo guardar el artículo. Revisá tu conexión y tus permisos, e intentá de nuevo.');
+  } finally {
+    submit.disabled = false;
   }
-  savePosts();
-  renderBlog();
-  closeOverlay('editor-overlay');
 }
 
 /* ─── DELETE ── */
-function askDelete(id) { deletingId = id; openOverlay('delete-overlay'); }
-function confirmDelete() {
-  posts = posts.filter(x => x.id !== deletingId);
-  savePosts(); renderBlog();
-  closeOverlay('delete-overlay');
-  deletingId = null;
+function askDelete(id) {
+  if (!isAuthorizedAdmin()) return;
+  deletingId = id;
+  openOverlay('delete-overlay');
+}
+async function confirmDelete() {
+  if (!isAuthorizedAdmin()) return;
+  const post = posts.find(x => Number(x.id) === Number(deletingId));
+  if (!post || !post.firestoreId) {
+    alert('No se encontró el artículo que se quería eliminar. Actualizá la página e intentá de nuevo.');
+    closeOverlay('delete-overlay');
+    deletingId = null;
+    return;
+  }
+  const submit = document.querySelector('#delete-overlay .form-submit');
+  submit.disabled = true;
+  try {
+    await postsCol.doc(post.firestoreId).delete();
+    closeOverlay('delete-overlay');
+    deletingId = null;
+  } catch (error) {
+    console.error('Error eliminando artículo:', error);
+    alert('No se pudo eliminar el artículo. Revisá tu conexión y tus permisos, e intentá de nuevo.');
+  } finally {
+    submit.disabled = false;
+  }
 }
 
 /* ─── OVERLAY UTILS ── */
@@ -1099,11 +1338,25 @@ function submitQuiz() {
   // Show summary
   const labels = { goal: 'Objetivo', level: 'Nivel', days: 'Días/semana', limit: 'Limitaciones', name: 'Nombre', phone: 'WhatsApp', when: 'Quiere empezar' };
   const keys   = ['name', 'phone', 'goal', 'level', 'days', 'limit', 'when'];
-  document.getElementById('quiz-summary').innerHTML =
-    `<div class="quiz-result-summary-title">Tu respuestas</div>` +
-    keys.map(k => quizAnswers[k]
-      ? `<div class="quiz-result-row"><span class="quiz-result-key">${labels[k]}</span><span class="quiz-result-val">${quizAnswers[k]}</span></div>`
-      : '').join('');
+  const summary = document.getElementById('quiz-summary');
+  summary.replaceChildren();
+  const sumTitle = document.createElement('div');
+  sumTitle.className = 'quiz-result-summary-title';
+  sumTitle.textContent = 'Tus respuestas';
+  summary.appendChild(sumTitle);
+  keys.forEach(k => {
+    if (!quizAnswers[k]) return;
+    const row = document.createElement('div');
+    row.className = 'quiz-result-row';
+    const keyEl = document.createElement('span');
+    keyEl.className = 'quiz-result-key';
+    keyEl.textContent = labels[k];
+    const valEl = document.createElement('span');
+    valEl.className = 'quiz-result-val';
+    valEl.textContent = quizAnswers[k];
+    row.append(keyEl, valEl);
+    summary.appendChild(row);
+  });
 
   // Show result step
   document.getElementById('quiz-progress').style.width = '100%';
@@ -1125,10 +1378,45 @@ function resetQuiz() {
 }
 
 /* ─── INIT ── */
+auth.onAuthStateChanged(user => {
+  isAdmin = !!user && user.uid === ADMIN_UID;
+  syncAdminUi();
+  if (user && !isAdmin) {
+    auth.signOut().catch(error => {
+      console.error('No se pudo cerrar una sesión sin permisos:', error);
+    });
+  }
+});
+window.addEventListener('hashchange', syncAdminUi);
+document.getElementById('nav-burger').addEventListener('click', () => {
+  const links = document.getElementById('nav-links');
+  const open = links.classList.toggle('open');
+  const burger = document.getElementById('nav-burger');
+  burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  burger.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+});
+document.getElementById('nav-links').addEventListener('click', (e) => {
+  if (e.target.closest('a')) closeMobileMenu();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Escape') return;
+  document.querySelectorAll('.overlay.open').forEach(el => el.classList.remove('open'));
+  document.body.style.overflow = '';
+  closeMobileMenu();
+});
+function closeMobileMenu() {
+  document.getElementById('nav-links').classList.remove('open');
+  const burger = document.getElementById('nav-burger');
+  burger.setAttribute('aria-expanded', 'false');
+  burger.setAttribute('aria-label', 'Abrir menú');
+}
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 900) closeMobileMenu();
+});
 loadPosts();
-renderBlog();
 initReveal();
 initCounters();
+syncAdminUi();
 </script>
 </body>
 </html>
