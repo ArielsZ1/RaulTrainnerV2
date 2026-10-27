@@ -127,17 +127,10 @@
 
   /* ABOUT */
   #about { border-top: 1px solid var(--border); }
-  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; margin-top: 3rem; }
+  .about-grid { display: grid; grid-template-columns: minmax(0, 65ch); gap: 6rem; align-items: start; margin-top: 3rem; }
   .about-text p { color: var(--muted); line-height: 1.85; margin-bottom: 1.2rem; font-size: 1rem; }
   .about-tags { display: flex; flex-wrap: wrap; gap: 0.55rem; margin-top: 1.8rem; }
   .tag { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); border: 1.5px solid var(--green-light); padding: 0.4rem 0.85rem; background: var(--green-light); font-weight: 600; }
-  .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .result-card { background: var(--white); border: 1px solid var(--border); padding: 1.5rem; position: relative; overflow: hidden; transition: box-shadow 0.3s; box-shadow: 0 1px 4px var(--shadow); }
-  .result-card:hover { box-shadow: 0 4px 16px var(--shadow-md); }
-  .result-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--green); }
-  .result-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 120px; text-align: center; }
-  .result-icon { font-size: 1.8rem; margin-bottom: 0.6rem; opacity: 0.3; }
-  .result-text { font-family: 'Montserrat', sans-serif; font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted2); line-height: 1.6; }
 
   /* ── PARA QUIÉN ── */
   #para-quien { border-top: 1px solid var(--border); }
@@ -257,7 +250,6 @@
   body.dark-mode body::before { opacity: 0.06; }
   body.dark-mode .service-card,
   body.dark-mode .blog-card,
-  body.dark-mode .result-card,
   body.dark-mode .paraquien-item,
   body.dark-mode .contact-link,
   body.dark-mode .overlay-box,
@@ -561,10 +553,6 @@
     font-size: .72rem;
     letter-spacing: 0;
   }
-  .results-grid { gap: .65rem; }
-  .result-card { overflow: hidden; border: 1px solid var(--border); border-radius: 1.25rem; background: #fff; }
-  .result-placeholder { min-height: 8rem; background: linear-gradient(140deg, #e7eef9, #f7f9fc); }
-  .result-text { font-family: 'Onest', sans-serif; font-size: .65rem; letter-spacing: .08em; }
   #para-quien { background: #fff; }
   .paraquien-item { gap: 1rem; border: 1px solid var(--border); border-radius: 1.25rem; background: var(--bg2); }
   .paraquien-check { border-radius: 50%; background: #e4edfb; color: var(--green); }
@@ -665,8 +653,8 @@
   body.dark-mode section, body.dark-mode #about, body.dark-mode #services, body.dark-mode #cuestionario { background: var(--bg2); }
   body.dark-mode #para-quien, body.dark-mode #blog, body.dark-mode .service-card, body.dark-mode .blog-card { background: var(--bg); }
   body.dark-mode .about-tags .tag, body.dark-mode .quiz-wrapper { background: var(--card); }
+  body.dark-mode .about-tags .tag { color: var(--charcoal); }
   body.dark-mode .paraquien-item { background: var(--card); }
-  body.dark-mode .result-placeholder { background: linear-gradient(140deg, #1d2e43, #23354b); }
   body.dark-mode .quiz-option:hover, body.dark-mode .quiz-option.selected { background: #203653; }
   body.dark-mode .blog-title-card, body.dark-mode .service-name { color: var(--charcoal); }
   @media (max-width: 1050px) {
@@ -722,6 +710,7 @@
 <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
+<script>try{if(localStorage.getItem('rl_theme')==='dark')document.body.classList.add('dark-mode')}catch(e){}</script>
 <div class="cell-bg"></div>
 
 <!-- HERO -->
@@ -797,21 +786,13 @@
         <span class="tag">Ciencias Biológicas</span>
       </div>
     </div>
-    <div class="reveal-right">
-      <p style="font-family:'Montserrat',sans-serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--green);margin-bottom:1rem;">Resultados de alumnos</p>
-      <div class="results-grid">
-        <div class="result-card"><div class="result-placeholder"><div class="result-icon">📸</div><div class="result-text">Antes / Después<br>Próximamente</div></div></div>
-        <div class="result-card"><div class="result-placeholder"><div class="result-icon">📸</div><div class="result-text">Antes / Después<br>Próximamente</div></div></div>
-        <div class="result-card"><div class="result-placeholder"><div class="result-icon">💬</div><div class="result-text">Testimonio<br>Próximamente</div></div></div>
-        <div class="result-card"><div class="result-placeholder"><div class="result-icon">📊</div><div class="result-text">Progreso<br>Próximamente</div></div></div>
-      </div>
     </div>
   </div>
 </section>
 
 <!-- PARA QUIÉN -->
 <section id="para-quien">
-  <p class="section-label reveal">Marketing</p>
+  <p class="section-label reveal">Para quién</p>
   <h2 class="section-title reveal">¿ESTE ENTRENAMIENTO<br>ES PARA VOS?</h2>
   <div class="paraquien-grid">
     <div class="paraquien-list">
@@ -1077,7 +1058,16 @@ async function loadPosts() {
     console.error('Error cargando artículos:', error);
   }
   renderBlog();
+  const linked = posts.find(p => location.hash === '#post-' + postSlug(p));
+  if (linked) readPost(linked);
 }
+
+// shortcut: el link depende del título; si se cambia el título, los links viejos dejan de abrir el artículo
+function postSlug(p) {
+  return String(p.title || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+function postUrl(p) { return location.origin + location.pathname + '#post-' + postSlug(p); }
 
 function fmtDate(iso) {
   const d = new Date(String(iso) + 'T00:00:00');
@@ -1107,7 +1097,12 @@ function renderBlog() {
   sorted.forEach((p, i) => {
     const card = document.createElement('div');
     card.className = 'blog-card' + (p.featured && i === 0 ? ' featured' : '');
+    card.tabIndex = 0;
+    card.setAttribute('role', 'button');
     card.addEventListener('click', () => readPost(p));
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); readPost(p); }
+    });
 
     const imgUrl = safeImgUrl(p.img);
     if (imgUrl) {
@@ -1151,7 +1146,7 @@ function renderBlog() {
     const shareBtn = document.createElement('button');
     shareBtn.className = 'blog-share';
     shareBtn.textContent = '↗ Compartir';
-    shareBtn.addEventListener('click', (e) => { e.stopPropagation(); sharePost(p.title); });
+    shareBtn.addEventListener('click', (e) => { e.stopPropagation(); sharePost(p); });
 
     actions.append(shareBtn);
     meta.append(date, actions);
@@ -1200,17 +1195,23 @@ function readPost(p) {
     body.appendChild(el);
   });
   root.append(cat, title, date, body);
+  history.replaceState(null, '', '#post-' + postSlug(p));
   openOverlay('read-overlay');
 }
 
-function sharePost(title) {
-  if (navigator.share) { navigator.share({ title, url: location.href }); }
-  else { navigator.clipboard.writeText(location.href).then(() => alert('¡Link copiado!')); }
+function sharePost(p) {
+  const url = postUrl(p);
+  if (navigator.share) { navigator.share({ title: p.title, url }).catch(() => {}); }
+  else { navigator.clipboard.writeText(url).then(() => alert('¡Link copiado!')); }
 }
 
 /* ─── OVERLAY UTILS ── */
 function openOverlay(id) { document.getElementById(id).classList.add('open'); document.body.style.overflow = 'hidden'; }
-function closeOverlay(id) { document.getElementById(id).classList.remove('open'); document.body.style.overflow = ''; }
+function closeOverlay(id) {
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+  if (location.hash.startsWith('#post-')) history.replaceState(null, '', location.pathname);
+}
 
 /* ─── LEAD MAGNET ── */
 function downloadGuide() {
@@ -1257,11 +1258,10 @@ function initCounters() {
 function toggleDark() {
   const isDark = document.body.classList.toggle('dark-mode');
   document.getElementById('dark-icon').textContent = isDark ? '🌙' : '☀️';
-  localStorage.setItem('rl_theme', isDark ? 'dark' : 'light');
+  try { localStorage.setItem('rl_theme', isDark ? 'dark' : 'light'); } catch (e) {}
 }
 (function initTheme() {
-  const saved = localStorage.getItem('rl_theme');
-  if (saved === 'dark') {
+  if (document.body.classList.contains('dark-mode')) {
     document.body.classList.add('dark-mode');
     document.getElementById('dark-icon').textContent = '🌙';
   }
@@ -1376,8 +1376,7 @@ document.getElementById('nav-links').addEventListener('click', (e) => {
 });
 document.addEventListener('keydown', (e) => {
   if (e.key !== 'Escape') return;
-  document.querySelectorAll('.overlay.open').forEach(el => el.classList.remove('open'));
-  document.body.style.overflow = '';
+  document.querySelectorAll('.overlay.open').forEach(el => closeOverlay(el.id));
   closeMobileMenu();
 });
 function closeMobileMenu() {
