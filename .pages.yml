@@ -1,0 +1,36 @@
+media:
+  input: Imagenes
+  output: /Imagenes
+  categories: [image]
+
+content:
+  - name: posts
+    label: Artículos del blog
+    type: file
+    path: posts.json
+    format: json
+    list: true
+    fields:
+      - name: title
+        label: Título
+        type: string
+      - name: cat
+        label: Categoría
+        type: select
+        options:
+          values: [Entrenamiento, Nutrición, Hábitos, Biología, Motivación, Tips]
+      - name: date
+        label: Fecha
+        type: date
+      - name: featured
+        label: Destacado (se muestra grande)
+        type: boolean
+      - name: img
+        label: Imagen de portada
+        type: image
+      - name: excerpt
+        label: Resumen corto (aparece en la grilla)
+        type: string
+      - name: body
+        label: Contenido (dejá una línea en blanco entre párrafos)
+        type: text
