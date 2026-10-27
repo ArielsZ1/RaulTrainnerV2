@@ -34,3 +34,27 @@ content:
       - name: body
         label: Contenido (dejá una línea en blanco entre párrafos)
         type: text
+
+  - name: sitio
+    label: Fotos del sitio
+    type: file
+    path: sitio.json
+    format: json
+    fields:
+      - name: fotoPortada
+        label: Foto de portada (vertical, de Raúl entrenando)
+        type: image
+      - name: fotoSobreMi
+        label: Foto de "Sobre mí"
+        type: image
+      - name: resultados
+        label: Resultados de alumnos (con permiso de cada alumno)
+        type: object
+        list: true
+        fields:
+          - name: foto
+            label: Foto
+            type: image
+          - name: texto
+            label: Texto corto (ej. "Martín, 12 semanas")
+            type: string
