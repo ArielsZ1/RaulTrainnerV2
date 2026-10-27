@@ -79,9 +79,6 @@
   .nav-right { display: flex; gap: 0.8rem; align-items: center; }
   .nav-cta { font-family: 'Montserrat', sans-serif; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: #fff; background: var(--green); border: none; padding: 0.6rem 1.3rem; cursor: pointer; text-decoration: none; transition: background 0.2s; font-weight: 600; }
   .nav-cta:hover { background: #15803d; }
-  .nav-admin-btn { display: none; font-family: 'Montserrat', sans-serif; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); background: transparent; border: 1px solid var(--border-strong); padding: 0.5rem 1rem; cursor: pointer; transition: color 0.2s, border-color 0.2s; font-weight: 500; }
-  .nav-admin-btn:hover { color: var(--charcoal); border-color: var(--charcoal); }
-  .nav-admin-btn.visible { display: inline-block; }
   .nav-burger { display: none; width: 42px; height: 42px; background: transparent; border: 1px solid var(--border-strong); cursor: pointer; align-items: center; justify-content: center; flex-direction: column; gap: 5px; }
   .nav-burger span { display: block; width: 18px; height: 2px; background: var(--charcoal); }
   .quiz-disclaimer { font-size: 0.8rem; color: var(--muted2); line-height: 1.6; margin-top: 1.5rem; text-align: center; }
@@ -213,12 +210,6 @@
   .blog-actions { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
   .blog-share { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; color: var(--green); letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; background: none; border: none; padding: 0; transition: opacity 0.2s; font-weight: 600; }
   .blog-share:hover { opacity: 0.65; }
-  .blog-edit-btn { font-family: 'Montserrat', sans-serif; font-size: 0.58rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; background: none; border: 1px solid var(--border-strong); padding: 0.22rem 0.55rem; transition: color 0.2s; display: none; }
-  .blog-edit-btn:hover { color: var(--charcoal); }
-  .blog-del-btn { font-family: 'Montserrat', sans-serif; font-size: 0.58rem; color: #dc2626; letter-spacing: 0.1em; cursor: pointer; background: none; border: 1px solid rgba(220,38,38,0.25); padding: 0.22rem 0.55rem; transition: background 0.2s; display: none; }
-  .blog-del-btn:hover { background: rgba(220,38,38,0.08); }
-  body.admin-mode .blog-edit-btn,
-  body.admin-mode .blog-del-btn { display: inline-block; }
   .blog-empty { grid-column: 1 / -1; text-align: center; padding: 5rem 2rem; border: 1.5px dashed var(--border-strong); }
   .blog-empty-icon { font-size: 2.5rem; opacity: 0.2; margin-bottom: 1rem; }
   .blog-empty p { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted2); }
@@ -294,15 +285,6 @@
   body.dark-mode .dark-toggle::after { transform: translateX(16px); background: #fff; }
   .dark-toggle-wrap { display: flex; align-items: center; gap: 0.5rem; }
   .dark-toggle-icon { font-size: 0.85rem; line-height: 1; }
-  #admin-bar { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 150; background: var(--charcoal); border-top: 2px solid var(--green); padding: 0.9rem 4vw; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
-  body.admin-mode #admin-bar { display: flex; }
-  .admin-bar-label { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green); display: flex; align-items: center; gap: 0.6rem; }
-  .admin-bar-label::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: pulse-dot 1.5s infinite; }
-  .admin-bar-actions { display: flex; gap: 0.8rem; }
-  .admin-btn-new { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: #fff; background: var(--green); border: none; padding: 0.65rem 1.5rem; cursor: pointer; transition: opacity 0.2s; }
-  .admin-btn-new:hover { opacity: 0.85; }
-  .admin-btn-exit { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); background: transparent; border: 1px solid var(--border); padding: 0.65rem 1.2rem; cursor: pointer; transition: color 0.2s, border-color 0.2s; }
-  .admin-btn-exit:hover { color: #ff5555; border-color: #ff5555; }
 
   /* OVERLAYS */
   .overlay { display: none; position: fixed; inset: 0; background: rgba(8,12,10,0.95); z-index: 200; align-items: center; justify-content: center; padding: 2rem; }
@@ -320,28 +302,13 @@
   .modal-body { font-size: 0.95rem; color: var(--muted); line-height: 1.85; }
   .modal-body p { margin-bottom: 1rem; }
 
-  /* FORM */
-  .form-group { margin-bottom: 1.4rem; }
-  .form-label { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); display: block; margin-bottom: 0.5rem; }
-  .form-input, .form-select, .form-textarea { width: 100%; background: var(--bg); border: 1px solid var(--border-strong); color: var(--charcoal); font-family: 'DM Sans', sans-serif; font-size: 0.95rem; padding: 0.8rem 1rem; outline: none; transition: border-color 0.2s; }
-  .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--green); }
-  .form-textarea { min-height: 180px; resize: vertical; line-height: 1.65; }
+  /* FORM (cuestionario) */
+  .form-input, .form-select { width: 100%; background: var(--bg); border: 1px solid var(--border-strong); color: var(--charcoal); font-family: 'DM Sans', sans-serif; font-size: 0.95rem; padding: 0.8rem 1rem; outline: none; transition: border-color 0.2s; }
+  .form-input:focus, .form-select:focus { border-color: var(--green); }
   .form-select { appearance: none; cursor: pointer; }
   .form-select option { background: var(--bg2); }
-  .form-hint { font-family: 'Montserrat', sans-serif; font-size: 0.58rem; color: var(--muted); margin-top: 0.4rem; letter-spacing: 0.08em; line-height: 1.5; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .form-actions { display: flex; gap: 0.8rem; margin-top: 2rem; }
-  .form-submit { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: #fff; background: var(--green); border: none; padding: 0.85rem 1.8rem; cursor: pointer; transition: opacity 0.2s; flex: 1; }
-  .form-submit:hover { opacity: 0.85; }
-  .form-cancel { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); background: transparent; border: 1px solid var(--border); padding: 0.85rem 1.4rem; cursor: pointer; transition: color 0.2s; }
-  .form-cancel:hover { color: var(--charcoal); }
-  /* Image preview in editor */
-  #img-preview { display: none; width: 100%; max-height: 160px; object-fit: cover; margin-top: 0.8rem; border: 1px solid var(--border); }
-  #img-preview.show { display: block; }
 
-  /* LOGIN */
-  .login-subtitle { font-size: 0.92rem; color: var(--muted); margin-bottom: 2rem; line-height: 1.6; }
-  .login-error { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; color: #ff5555; letter-spacing: 0.1em; margin-top: 0.5rem; display: none; }
+
 
   /* ANIMATIONS */
   @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
@@ -410,7 +377,6 @@
     }
     nav .nav-links.open { display: flex; }
     nav .nav-links a { display: block; padding: 0.85rem 0; border-bottom: 1px solid var(--border); }
-    .form-row { grid-template-columns: 1fr; }
     .lead-inner { padding: 2rem; }
   }
 
@@ -502,15 +468,13 @@
   .dark-toggle { width: 2rem; height: 1.15rem; background: rgba(255,255,255,.32); }
   .dark-toggle::after { width: .85rem; height: .85rem; background: #fff; }
   body.dark-mode .dark-toggle::after { transform: translateX(.85rem); }
-  .nav-admin-btn, .nav-cta {
+  .nav-cta {
     border-radius: var(--radius-pill);
     font-family: 'Onest', sans-serif;
     font-size: .72rem;
     letter-spacing: 0;
     text-transform: none;
   }
-  .nav-admin-btn { color: #fff; border-color: rgba(255,255,255,.3); }
-  .nav-admin-btn:hover { color: #fff; border-color: #fff; }
   .nav-cta { padding: .7rem 1.15rem; background: #fff; color: var(--dark); }
   .nav-cta:hover { background: #e8effb; color: var(--dark); }
   .nav-burger {
@@ -682,10 +646,8 @@
   .overlay { background: rgba(8, 24, 48, .72); backdrop-filter: blur(6px); }
   .overlay-box { border: 1px solid var(--border); border-radius: var(--radius-card); box-shadow: 0 2rem 6rem rgba(8,24,48,.25); }
   .overlay-title { font-family: 'Onest', sans-serif; letter-spacing: -.035em; }
-  .form-input, .form-select, .form-textarea { border-radius: .75rem; font-family: 'Onest', sans-serif; }
-  .form-submit, .form-cancel, .overlay-close { border-radius: var(--radius-pill); font-family: 'Onest', sans-serif; }
-  #admin-bar { background: var(--dark); }
-  .admin-btn-new, .admin-btn-exit { border-radius: var(--radius-pill); font-family: 'Onest', sans-serif; letter-spacing: .02em; text-transform: none; }
+  .form-input, .form-select { border-radius: .75rem; font-family: 'Onest', sans-serif; }
+  .overlay-close { border-radius: var(--radius-pill); font-family: 'Onest', sans-serif; }
   body.dark-mode {
     --bg: #111923;
     --bg2: #172231;
@@ -736,7 +698,6 @@
     .nav-logo img { width: 2.35rem; height: 2.35rem !important; }
     .nav-right { gap: .4rem; }
     .nav-cta { display: none; }
-    .nav-admin-btn { padding: .48rem .7rem; }
     .hero-main { padding: 1rem 1.35rem; }
     .hero-title { font-size: clamp(3.2rem, 14vw, 5rem); }
     .hero-tag { font-size: .68rem; letter-spacing: .1em; }
@@ -758,6 +719,7 @@
     .reveal-left, .reveal-right, .reveal-left.visible, .reveal-right.visible { transform: none; }
   }
 </style>
+<script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 <div class="cell-bg"></div>
@@ -782,7 +744,6 @@
           <span class="dark-toggle-icon" id="dark-icon">☀️</span>
           <button class="dark-toggle" id="dark-toggle" onclick="toggleDark()" title="Modo oscuro/claro" aria-label="Cambiar tema"></button>
         </div>
-        <button class="nav-admin-btn" id="nav-admin-btn" onclick="openLogin()">⚙ Admin</button>
         <a href="#contact" class="nav-cta">Contactar</a>
         <button class="nav-burger" id="nav-burger" type="button" aria-label="Abrir menú" aria-expanded="false">
           <span></span><span></span><span></span>
@@ -1093,89 +1054,6 @@
   <div class="footer-copy">Diseñado para evolucionar</div>
 </footer>
 
-<!-- ADMIN BAR -->
-<div id="admin-bar">
-  <span class="admin-bar-label">Modo administrador activo</span>
-  <div class="admin-bar-actions">
-    <button class="admin-btn-new" onclick="openEditor(null)">+ Nuevo artículo</button>
-    <button class="admin-btn-new" id="admin-seed-btn" onclick="seedDefaultPosts()" style="background:transparent;border:1px solid var(--green);display:none;">Cargar ejemplos</button>
-    <button class="admin-btn-exit" onclick="exitAdmin()">Salir del panel</button>
-  </div>
-</div>
-
-<!-- LOGIN -->
-<div class="overlay" id="login-overlay">
-  <div class="overlay-box" style="max-width:400px;">
-    <button class="overlay-close" onclick="closeOverlay('login-overlay')">✕</button>
-    <div class="overlay-title">ACCESO ADMIN</div>
-    <p class="login-subtitle">Las credenciales están en Firebase Authentication, no en esta página. Ingresá el email y la contraseña del administrador.</p>
-    <div class="form-group">
-      <label class="form-label">Email</label>
-      <input class="form-input" type="email" id="login-email" autocomplete="username" placeholder="admin@email.com" onkeydown="if(event.key==='Enter')tryLogin()">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Contraseña</label>
-      <input class="form-input" type="password" id="login-pass" autocomplete="current-password" placeholder="••••••••" onkeydown="if(event.key==='Enter')tryLogin()">
-      <div class="login-error" id="login-error">Email o contraseña incorrectos. Intentá de nuevo.</div>
-    </div>
-    <div class="form-actions">
-      <button class="form-submit" onclick="tryLogin()">Ingresar</button>
-      <button class="form-cancel" onclick="closeOverlay('login-overlay')">Cancelar</button>
-    </div>
-  </div>
-</div>
-
-<!-- EDITOR -->
-<div class="overlay" id="editor-overlay">
-  <div class="overlay-box">
-    <button class="overlay-close" onclick="closeOverlay('editor-overlay')">✕</button>
-    <div class="overlay-title" id="editor-heading">NUEVO ARTÍCULO</div>
-    <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Categoría</label>
-        <select class="form-select" id="f-cat">
-          <option>Entrenamiento</option>
-          <option>Nutrición</option>
-          <option>Hábitos</option>
-          <option>Biología</option>
-          <option>Motivación</option>
-          <option>Tips</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Artículo destacado</label>
-        <select class="form-select" id="f-featured">
-          <option value="0">No destacado</option>
-          <option value="1">Sí — destacar (se muestra grande)</option>
-        </select>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Título del artículo</label>
-      <input class="form-input" type="text" id="f-title" placeholder="Ej: Los 5 errores más comunes al entrenar">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Imagen de portada (URL)</label>
-      <input class="form-input" type="url" id="f-img" placeholder="https://... (link de imagen de internet)" oninput="previewImg()">
-      <div class="form-hint">Pegá el link directo de una imagen (ej: de Unsplash, o subida a tu Drive). Opcional.</div>
-      <img id="img-preview" alt="Preview de portada">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Resumen corto (aparece en la grilla)</label>
-      <input class="form-input" type="text" id="f-excerpt" placeholder="Una o dos frases que inviten a leer...">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Contenido completo del artículo</label>
-      <textarea class="form-textarea" id="f-body" placeholder="Escribí el artículo acá. Para separar párrafos, dejá una línea en blanco."></textarea>
-      <div class="form-hint">Cada línea en blanco entre párrafos los separa automáticamente.</div>
-    </div>
-    <div class="form-actions">
-      <button class="form-submit" onclick="savePost()">Guardar artículo</button>
-      <button class="form-cancel" onclick="closeOverlay('editor-overlay')">Cancelar</button>
-    </div>
-  </div>
-</div>
-
 <!-- READ -->
 <div class="overlay" id="read-overlay" onclick="if(event.target===this)closeOverlay('read-overlay')">
   <div class="overlay-box">
@@ -1184,51 +1062,26 @@
   </div>
 </div>
 
-<!-- DELETE CONFIRM -->
-<div class="overlay" id="delete-overlay">
-  <div class="overlay-box" style="max-width:420px;">
-    <button class="overlay-close" onclick="closeOverlay('delete-overlay')">✕</button>
-    <div class="overlay-title">¿ELIMINAR?</div>
-    <p style="color:var(--muted);margin-bottom:2rem;line-height:1.7;">Esta acción eliminará el artículo permanentemente y no se puede deshacer.</p>
-    <div class="form-actions">
-      <button class="form-submit" style="background:#ff5555;color:#fff;" onclick="confirmDelete()">Sí, eliminar</button>
-      <button class="form-cancel" onclick="closeOverlay('delete-overlay')">Cancelar</button>
-    </div>
-  </div>
-</div>
-
 <script>
-/* ─── CONFIG ── */
-const ADMIN_PASS = 'raul2025';
-const STORAGE_KEY = 'rl_blog_v2';
-
 /* ─── STATE ── */
 let posts = [];
-let isAdmin = false;
-let editingId = null;
-let deletingId = null;
 
-/* ─── FIRESTORE: ESCUCHA EN TIEMPO REAL ── */
-// onSnapshot actúa como un "vigilante permanente": cada vez que alguien
-// agrega, edita o borra un artículo en Firestore, esta función se dispara
-// automáticamente en todos los navegadores que tengan la página abierta.
-function loadPosts() {
+/* ─── POSTS: se editan en posts.json (Pages CMS) ── */
+async function loadPosts() {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) { posts = JSON.parse(raw); return; }
-  } catch(e) {}
-  const now = new Date();
-  const fmt = d => d.toLocaleDateString('es-AR', {day:'numeric', month:'short', year:'numeric'});
-  const defaults = [
-    { id: Date.now() - 6000, cat: 'Hábitos', title: 'Por qué el descanso es parte del entrenamiento', excerpt: 'El sueño y la recuperación como herramienta activa de rendimiento.', body: 'El músculo no crece en el gimnasio, crece mientras dormís. Durante el sueño profundo se libera hormona de crecimiento y ocurre la mayor parte de la síntesis proteica muscular.\n\nIgnorar el descanso es como regar una planta y no darle luz. Dormir bien no es pereza, es parte del protocolo.', featured: false, date: fmt(new Date(now - 6*24*60*60*1000)), img: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=800&q=80' },
-    { id: Date.now() - 3000, cat: 'Nutrición', title: 'Proteína: cuánto necesitás realmente', excerpt: 'Mitos y verdades sobre el consumo proteico. La evidencia actual, simplificada.', body: 'El debate sobre la proteína en el fitness está lleno de mitos. La evidencia actual sugiere que para la mayoría de las personas activas, entre 1.6 y 2.2 g de proteína por kilogramo de peso corporal es suficiente.\n\nMás no siempre es mejor. Lo importante es la distribución a lo largo del día y la calidad de las fuentes proteicas.', featured: false, date: fmt(new Date(now - 3*24*60*60*1000)), img: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80' },
-    { id: Date.now(), cat: 'Entrenamiento', title: 'La ciencia detrás de la hipertrofia: por qué el músculo crece', excerpt: 'Entender cómo y por qué el músculo crece es la base de un entrenamiento inteligente. Exploramos los mecanismos biológicos.', body: 'La hipertrofia muscular es el aumento del tamaño de las células musculares, y ocurre como respuesta adaptativa al estrés mecánico durante el entrenamiento.\n\nExisten tres mecanismos principales: tensión mecánica (el peso y la carga), daño muscular (las microrroturas que generan inflamación y reconstrucción) y estrés metabólico (la acumulación de metabolitos durante el ejercicio).\n\nEntender esto te permite diseñar tu entrenamiento de forma más inteligente: no se trata de hacer siempre más, sino de hacer lo correcto.', featured: true, date: fmt(now), img: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80' }
-  ];
-  savePosts();
+    const res = await fetch('/posts.json', { cache: 'no-cache' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    posts = Array.isArray(data) ? data : [];
+  } catch (error) {
+    console.error('Error cargando artículos:', error);
+  }
+  renderBlog();
 }
 
-function savePosts() {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(posts)); } catch(e) {}
+function fmtDate(iso) {
+  const d = new Date(String(iso) + 'T00:00:00');
+  return isNaN(d) ? '' : d.toLocaleDateString('es-AR', {day:'numeric', month:'short', year:'numeric'});
 }
 
 /* ─── RENDER BLOG ── */
@@ -1242,20 +1095,19 @@ function renderBlog() {
     icon.className = 'blog-empty-icon';
     icon.textContent = '✍️';
     const p = document.createElement('p');
-    p.innerHTML = 'No hay artículos todavía.<br>Entrá al panel admin para publicar el primero.';
+    p.textContent = 'No hay artículos todavía.';
     empty.append(icon, p);
     grid.appendChild(empty);
     return;
   }
-  const sorted = [...posts].sort((a,b) => Number(b.id) - Number(a.id));
+  const sorted = [...posts].sort((a,b) => String(b.date || '').localeCompare(String(a.date || '')));
   const featIdx = sorted.findIndex(p => p.featured);
   if (featIdx > 0) { const [f] = sorted.splice(featIdx, 1); sorted.unshift(f); }
 
   sorted.forEach((p, i) => {
-    const postId = Number(p.id);
     const card = document.createElement('div');
     card.className = 'blog-card' + (p.featured && i === 0 ? ' featured' : '');
-    card.addEventListener('click', () => { if (Number.isFinite(postId)) readPost(postId); });
+    card.addEventListener('click', () => readPost(p));
 
     const imgUrl = safeImgUrl(p.img);
     if (imgUrl) {
@@ -1292,24 +1144,16 @@ function renderBlog() {
     meta.className = 'blog-meta';
     const date = document.createElement('span');
     date.className = 'blog-date';
-    date.textContent = p.date || '';
+    date.textContent = fmtDate(p.date);
     const actions = document.createElement('div');
     actions.className = 'blog-actions';
 
-    const editBtn = document.createElement('button');
-    editBtn.className = 'blog-edit-btn';
-    editBtn.textContent = '✎ Editar';
-    editBtn.addEventListener('click', (e) => { e.stopPropagation(); openEditor(postId); });
-    const delBtn = document.createElement('button');
-    delBtn.className = 'blog-del-btn';
-    delBtn.textContent = '✕ Borrar';
-    delBtn.addEventListener('click', (e) => { e.stopPropagation(); askDelete(postId); });
     const shareBtn = document.createElement('button');
     shareBtn.className = 'blog-share';
     shareBtn.textContent = '↗ Compartir';
     shareBtn.addEventListener('click', (e) => { e.stopPropagation(); sharePost(p.title); });
 
-    actions.append(editBtn, delBtn, shareBtn);
+    actions.append(shareBtn);
     meta.append(date, actions);
     body.append(cat, title, excerpt, meta);
     card.appendChild(body);
@@ -1321,15 +1165,13 @@ function safeImgUrl(url) {
   if (!url) return '';
   try {
     const u = new URL(String(url), location.href);
-    if (u.protocol === 'https:') return u.href;
+    if (u.protocol === 'https:' || u.origin === location.origin) return u.href;
   } catch (e) {}
   return '';
 }
 
 /* ─── READ ── */
-function readPost(id) {
-  const p = posts.find(x => Number(x.id) === Number(id));
-  if (!p) return;
+function readPost(p) {
   const root = document.getElementById('read-content');
   root.replaceChildren();
   const imgUrl = safeImgUrl(p.img);
@@ -1349,7 +1191,7 @@ function readPost(id) {
   title.textContent = p.title || '';
   const date = document.createElement('div');
   date.className = 'modal-date';
-  date.textContent = p.date || '';
+  date.textContent = fmtDate(p.date);
   const body = document.createElement('div');
   body.className = 'modal-body';
   String(p.body || '').split(/\n\n+/).forEach(par => {
@@ -1366,151 +1208,9 @@ function sharePost(title) {
   else { navigator.clipboard.writeText(location.href).then(() => alert('¡Link copiado!')); }
 }
 
-/* ─── IMAGE PREVIEW ── */
-function previewImg() {
-  const url = document.getElementById('f-img').value.trim();
-  const preview = document.getElementById('img-preview');
-  const safeUrl = safeImgUrl(url);
-  if (safeUrl) { preview.src = safeUrl; preview.classList.add('show'); }
-  else { preview.classList.remove('show'); }
-}
-
-/* ─── AUTH ── */
-function syncAdminUi() {
-  const btn = document.getElementById('nav-admin-btn');
-  const seedBtn = document.getElementById('admin-seed-btn');
-  if (isAdmin) {
-    document.body.classList.add('admin-mode');
-    btn.textContent = '⚙ Salir';
-    btn.classList.add('visible');
-    if (seedBtn) seedBtn.style.display = posts.length === 0 ? 'inline-block' : 'none';
-  } else {
-    document.body.classList.remove('admin-mode');
-    btn.textContent = '⚙ Admin';
-    if (location.hash === '#admin') btn.classList.add('visible');
-    else btn.classList.remove('visible');
-    if (seedBtn) seedBtn.style.display = 'none';
-  }
-}
-
-function isAuthorizedAdmin() {
-  return isAdmin && auth.currentUser?.uid === ADMIN_UID;
-}
-
-function openLogin() {
-  if (isAuthorizedAdmin()) { exitAdmin(); return; }
-  closeMobileMenu();
-  document.getElementById('login-email').value = '';
-  document.getElementById('login-pass').value = '';
-  document.getElementById('login-error').style.display = 'none';
-  openOverlay('login-overlay');
-  setTimeout(() => document.getElementById('login-email').focus(), 120);
-}
-
-async function tryLogin() {
-  const email = document.getElementById('login-email').value.trim();
-  const pass = document.getElementById('login-pass').value;
-  const errBox = document.getElementById('login-error');
-  const submit = document.querySelector('#login-overlay .form-submit');
-  if (!email || !pass) {
-    errBox.textContent = 'Completá email y contraseña.';
-    errBox.style.display = 'block';
-    return;
-  }
-  submit.disabled = true;
-  try {
-    const credential = await auth.signInWithEmailAndPassword(email, pass);
-    if (credential.user.uid !== ADMIN_UID) {
-      await auth.signOut();
-      errBox.textContent = 'Esta cuenta no tiene permisos de administrador.';
-      errBox.style.display = 'block';
-      document.getElementById('login-pass').value = '';
-      document.getElementById('login-pass').focus();
-      return;
-    }
-    closeOverlay('login-overlay');
-  } catch (e) {
-    console.error('Error al iniciar sesión:', e);
-    errBox.textContent = 'Email o contraseña incorrectos. Intentá de nuevo.';
-    errBox.style.display = 'block';
-    document.getElementById('login-pass').value = '';
-    document.getElementById('login-pass').focus();
-  } finally {
-    submit.disabled = false;
-  }
-}
-
-function exitAdmin() {
-  auth.signOut().catch(error => {
-    console.error('Error al cerrar sesión:', error);
-    alert('No se pudo cerrar la sesión. Intentá de nuevo.');
-  });
-}
-
-/* ─── EDITOR ── */
-function openEditor(id) {
-  if (!isAuthorizedAdmin()) return;
-  editingId = id;
-  document.getElementById('editor-heading').textContent = id ? 'EDITAR ARTÍCULO' : 'NUEVO ARTÍCULO';
-  document.getElementById('img-preview').classList.remove('show');
-  if (id) {
-    const p = posts.find(x => Number(x.id) === Number(id));
-    document.getElementById('f-cat').value = p.cat;
-    document.getElementById('f-featured').value = p.featured ? '1' : '0';
-    document.getElementById('f-title').value = p.title;
-    document.getElementById('f-img').value = p.img || '';
-    document.getElementById('f-excerpt').value = p.excerpt;
-    document.getElementById('f-body').value = p.body;
-    if (p.img) { document.getElementById('img-preview').src = p.img; document.getElementById('img-preview').classList.add('show'); }
-  } else {
-    document.getElementById('f-cat').value = 'Entrenamiento';
-    document.getElementById('f-featured').value = '0';
-    document.getElementById('f-title').value = '';
-    document.getElementById('f-img').value = '';
-    document.getElementById('f-excerpt').value = '';
-    document.getElementById('f-body').value = '';
-  }
-  openOverlay('editor-overlay');
-  setTimeout(() => document.getElementById('f-title').focus(), 120);
-}
-
-function savePost() {
-  const title   = document.getElementById('f-title').value.trim();
-  const excerpt = document.getElementById('f-excerpt').value.trim();
-  const body    = document.getElementById('f-body').value.trim();
-  const img     = document.getElementById('f-img').value.trim();
-  if (!title || !body) { alert('El título y el contenido son obligatorios.'); return; }
-  const dateStr = new Date().toLocaleDateString('es-AR', {day:'numeric', month:'short', year:'numeric'});
-  if (editingId) {
-    const idx = posts.findIndex(x => x.id === editingId);
-    posts[idx] = { ...posts[idx], cat: document.getElementById('f-cat').value, featured: document.getElementById('f-featured').value === '1', title, excerpt: excerpt || title, body, img };
-  } else {
-    posts.unshift({ id: Date.now(), cat: document.getElementById('f-cat').value, featured: document.getElementById('f-featured').value === '1', title, excerpt: excerpt || title, body, img, date: dateStr });
-  }
-  savePosts();
-  renderBlog();
-  closeOverlay('editor-overlay');
-}
-
-/* ─── DELETE ── */
-function askDelete(id) { deletingId = id; openOverlay('delete-overlay'); }
-function confirmDelete() {
-  posts = posts.filter(x => x.id !== deletingId);
-  savePosts(); renderBlog();
-  closeOverlay('delete-overlay');
-  deletingId = null;
-}
-
 /* ─── OVERLAY UTILS ── */
 function openOverlay(id) { document.getElementById(id).classList.add('open'); document.body.style.overflow = 'hidden'; }
 function closeOverlay(id) { document.getElementById(id).classList.remove('open'); document.body.style.overflow = ''; }
-
-function closeMobileMenu() {
-  document.getElementById('nav-links').classList.remove('open');
-  const burger = document.getElementById('nav-burger');
-  burger.setAttribute('aria-expanded', 'false');
-  burger.setAttribute('aria-label', 'Abrir menú');
-}
 
 /* ─── LEAD MAGNET ── */
 function downloadGuide() {
@@ -1666,27 +1366,32 @@ function resetQuiz() {
 /* ─── INIT ── */
 document.getElementById('nav-burger').addEventListener('click', () => {
   const links = document.getElementById('nav-links');
-  const burger = document.getElementById('nav-burger');
   const open = links.classList.toggle('open');
+  const burger = document.getElementById('nav-burger');
   burger.setAttribute('aria-expanded', open ? 'true' : 'false');
   burger.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
 });
-document.getElementById('nav-links').addEventListener('click', event => {
-  if (event.target.closest('a')) closeMobileMenu();
+document.getElementById('nav-links').addEventListener('click', (e) => {
+  if (e.target.closest('a')) closeMobileMenu();
 });
-document.addEventListener('keydown', event => {
-  if (event.key !== 'Escape') return;
-  document.querySelectorAll('.overlay.open').forEach(overlay => overlay.classList.remove('open'));
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Escape') return;
+  document.querySelectorAll('.overlay.open').forEach(el => el.classList.remove('open'));
   document.body.style.overflow = '';
   closeMobileMenu();
 });
+function closeMobileMenu() {
+  document.getElementById('nav-links').classList.remove('open');
+  const burger = document.getElementById('nav-burger');
+  burger.setAttribute('aria-expanded', 'false');
+  burger.setAttribute('aria-label', 'Abrir menú');
+}
 window.addEventListener('resize', () => {
   if (window.innerWidth > 1050) closeMobileMenu();
 });
 loadPosts();
 initReveal();
 initCounters();
-syncAdminUi();
 </script>
 </body>
 </html>

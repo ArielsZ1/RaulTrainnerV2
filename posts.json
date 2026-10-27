@@ -1,0 +1,29 @@
+[
+  {
+    "title": "La ciencia detrás de la hipertrofia: por qué el músculo crece",
+    "cat": "Entrenamiento",
+    "date": "2026-10-26",
+    "featured": true,
+    "img": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80",
+    "excerpt": "Entender cómo y por qué el músculo crece es la base de un entrenamiento inteligente. Exploramos los mecanismos biológicos.",
+    "body": "La hipertrofia muscular es el aumento del tamaño de las células musculares, y ocurre como respuesta adaptativa al estrés mecánico durante el entrenamiento.\n\nExisten tres mecanismos principales: tensión mecánica (el peso y la carga), daño muscular (las microrroturas que generan inflamación y reconstrucción) y estrés metabólico (la acumulación de metabolitos durante el ejercicio).\n\nEntender esto te permite diseñar tu entrenamiento de forma más inteligente: no se trata de hacer siempre más, sino de hacer lo correcto."
+  },
+  {
+    "title": "Proteína: cuánto necesitás realmente",
+    "cat": "Nutrición",
+    "date": "2026-10-23",
+    "featured": false,
+    "img": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80",
+    "excerpt": "Mitos y verdades sobre el consumo proteico. La evidencia actual, simplificada.",
+    "body": "El debate sobre la proteína en el fitness está lleno de mitos. La evidencia actual sugiere que para la mayoría de las personas activas, entre 1.6 y 2.2 g de proteína por kilogramo de peso corporal es suficiente.\n\nMás no siempre es mejor. Lo importante es la distribución a lo largo del día y la calidad de las fuentes proteicas."
+  },
+  {
+    "title": "Por qué el descanso es parte del entrenamiento",
+    "cat": "Hábitos",
+    "date": "2026-10-20",
+    "featured": false,
+    "img": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=800&q=80",
+    "excerpt": "El sueño y la recuperación como herramienta activa de rendimiento.",
+    "body": "El músculo no crece en el gimnasio, crece mientras dormís. Durante el sueño profundo se libera hormona de crecimiento y ocurre la mayor parte de la síntesis proteica muscular.\n\nIgnorar el descanso es como regar una planta y no darle luz. Dormir bien no es pereza, es parte del protocolo."
+  }
+]
